@@ -1,0 +1,15 @@
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\bin\Debug\net6.0\PSI-I-4gr-BoardEx.exe
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\bin\Debug\net6.0\PSI-I-4gr-BoardEx.deps.json
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\bin\Debug\net6.0\PSI-I-4gr-BoardEx.runtimeconfig.json
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\bin\Debug\net6.0\PSI-I-4gr-BoardEx.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\bin\Debug\net6.0\PSI-I-4gr-BoardEx.pdb
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.csproj.AssemblyReference.cache
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.AssemblyInfoInputs.cache
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.AssemblyInfo.cs
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.csproj.CoreCompileInputs.cache
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\refint\PSI-I-4gr-BoardEx.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.pdb
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\PSI-I-4gr-BoardEx.genruntimeconfig.cache
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\obj\Debug\net6.0\ref\PSI-I-4gr-BoardEx.dll
