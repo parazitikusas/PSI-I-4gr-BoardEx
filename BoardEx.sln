@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardEx.Web", "BoardEx.Web\BoardEx.Web.csproj", "{4A8FEC3A-CE83-45E7-B319-276701B9E138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardEx.Web", "BoardEx.Web\BoardEx.Web.csproj", "{4A8FEC3A-CE83-45E7-B319-276701B9E138}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
