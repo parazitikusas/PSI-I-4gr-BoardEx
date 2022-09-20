@@ -1,7 +1,14 @@
+using BoardEx.Web.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<BoardExDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("BoardExDbConnectionString")));
 
 var app = builder.Build();
 

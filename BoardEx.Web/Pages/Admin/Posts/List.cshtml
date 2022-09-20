@@ -2,4 +2,42 @@
 @model BoardEx.Web.Pages.Admin.Posts.ListModel
 @{
 }
-<h1>Veikia</h1>
+
+
+
+<div class="bg-secondary bg-opacity-10 py-2 mb-5">
+	<div class="container">
+		<h1>BoardExs</h1>
+	</div>
+</div>
+
+@if (Model.BoardAds != null && Model.BoardAds.Any())
+{
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<td>Id</td>
+					<td>Pavadinimas</td>
+					<td> </td>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var boardAd in Model.BoardAds)
+				{
+					<tr>
+						<td>@boardAd.Id</td>
+						<td>@boardAd.Name</td>
+						<td><a href="/admin/posts/edit/@boardAd.Id">Peržiūrėti</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}
+else
+{
+	<div class="container">
+		<p>No blog post were found!</p>
+	</div>
+}
