@@ -2,6 +2,7 @@ using BoardEx.Web.Data;
 using BoardEx.Web.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
@@ -17,9 +18,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
         }
 
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            BoardAds = boardExDbContext.BoardAds.ToList();
+            BoardAds = await boardExDbContext.BoardAds.ToListAsync();
         }
     }
 }

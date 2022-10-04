@@ -22,7 +22,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
         {
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             var boardAd = new BoardAd()
             {
@@ -36,8 +36,8 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 IsSold = AddBoardAdRequest.IsSold
             };
 
-            boardExDbContext.BoardAds.Add(boardAd);
-            boardExDbContext.SaveChanges();
+            await boardExDbContext.BoardAds.AddAsync(boardAd);
+            await boardExDbContext.SaveChangesAsync();
             return RedirectToPage("/admin/posts/list");
         }
     }
