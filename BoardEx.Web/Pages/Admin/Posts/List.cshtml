@@ -11,6 +11,8 @@
 	</div>
 </div>
 
+<partial name="_Notification">
+
 @if (Model.BoardAds != null && Model.BoardAds.Any())
 {
 	<div class="container">
@@ -38,6 +40,6 @@
 else
 {
 	<div class="container">
-		<p>No blog post were found!</p>
+		<p>No board ad were found!</p>
 	</div>
 }
