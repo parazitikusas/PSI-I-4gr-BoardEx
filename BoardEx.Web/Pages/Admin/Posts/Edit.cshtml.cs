@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Web;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
@@ -33,6 +35,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
             try
             {
                 //throw new Exception();
+                var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+                using StreamWriter logFile = new(file, append: true);
+                await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Atnaujintas skelbimas");
 
                 await boardAdRepository.UpdateAsync(BoardAd);
                 
@@ -44,6 +49,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
             }
             catch (Exception)
             {
+                var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+                using StreamWriter logFile = new(file, append: true);
+                await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Nepavyko atnaujinti skelbimo");
                 ViewData["Notification"] = new Notification
                 {
                     Message = "Ooops! Kažkas negerai!",

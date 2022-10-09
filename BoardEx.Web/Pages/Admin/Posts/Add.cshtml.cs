@@ -40,6 +40,10 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             await boardAdRepository.AddAsync(boardAd);
 
+            var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+            using StreamWriter logFile = new(file, append: true);
+            await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Pridėtas naujas skelbimas");
+
             var notification = new Notification
             {
                 Type = Enums.NotificationType.Success,
