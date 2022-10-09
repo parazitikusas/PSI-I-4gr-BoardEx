@@ -1,57 +1,73 @@
-using BoardEx.Web.Data;
+﻿using BoardEx.Web.Data;
 using BoardEx.Web.Models.Domain;
+using BoardEx.Web.Models.ViewModels;
+using BoardEx.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
     public class EditModel : PageModel
     {
-        private readonly BoardExDbContext boardExDbContext;
+        private readonly IBoardAdRepository boardAdRepository;
 
         [BindProperty]
         public BoardAd BoardAd { get; set; }
 
-        public EditModel(BoardExDbContext boardExDbContext)
+        public EditModel(IBoardAdRepository boardAdRepository)
         {
-            this.boardExDbContext = boardExDbContext;
+            this.boardAdRepository = boardAdRepository;
         }
 
 
         public async Task OnGet(Guid Id)
         {
-            BoardAd = await boardExDbContext.BoardAds.FindAsync(Id);
-
+            BoardAd = await boardAdRepository.GetAsync(Id);
         }
 
-        public async Task<IActionResult> OnPostEdit()
+        public async Task<IActionResult> OnPostEdit()               // reikėtų padaryti, kad po sėkimingo atnaujinimo, redirectintu į listą ir ten rašytu notificationa.
         {
-            var existingBoardAd = await boardExDbContext.BoardAds.FindAsync(BoardAd.Id);
-
-            if (existingBoardAd != null)
+            try
             {
-                existingBoardAd.Name = BoardAd.Name;
-                existingBoardAd.City = BoardAd.City;
-                existingBoardAd.Content = BoardAd.Content;
-                existingBoardAd.Price = BoardAd.Price;
-                existingBoardAd.FeaturedImageUrl = BoardAd.FeaturedImageUrl;
-                existingBoardAd.PublishedDate = BoardAd.PublishedDate;
-                existingBoardAd.Author = BoardAd.Author;
-                existingBoardAd.IsSold = BoardAd.IsSold;
+                //throw new Exception();
+
+                await boardAdRepository.UpdateAsync(BoardAd);
+                
+                ViewData["Notification"] = new Notification
+                {
+                    Message = "Sėkmingai atnaujinta!",
+                    Type = Enums.NotificationType.Success
+                };
+            }
+            catch (Exception)
+            {
+                ViewData["Notification"] = new Notification
+                {
+                    Message = "Ooops! Kažkas negerai!",
+                    Type = Enums.NotificationType.Error
+                };
+
+                
             }
 
-            await boardExDbContext.SaveChangesAsync();
-            return RedirectToPage("/admin/posts/list");
+            return Page();
         }
 
         public async Task<IActionResult> OnPostDelete()
         {
-            var existingBoardAd = await boardExDbContext.BoardAds.FindAsync(BoardAd.Id);
-
-            if (existingBoardAd != null)
+            var deleted = await boardAdRepository.DeleteAsync(BoardAd.Id);
+            if (deleted)
             {
-                boardExDbContext.BoardAds.Remove(existingBoardAd);
-                await boardExDbContext.SaveChangesAsync();
+                var notification = new Notification
+                {
+                    Type = Enums.NotificationType.Success,
+                    Message = "Skelbimas sėkmingai ištrintas!"
+                };
+
+                TempData["Notification"] = JsonSerializer.Serialize(notification);
 
                 return RedirectToPage("/admin/posts/list");
             }

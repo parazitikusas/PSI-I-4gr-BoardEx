@@ -1,4 +1,5 @@
 using BoardEx.Web.Data;
+using BoardEx.Web.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BoardExDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("BoardExDbConnectionString")));
+
+builder.Services.AddScoped<IBoardAdRepository, BoardAdRepository>();        // inject implementation of interface
 
 var app = builder.Build();
 
