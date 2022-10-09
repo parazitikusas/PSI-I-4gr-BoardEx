@@ -18,15 +18,15 @@ namespace BoardEx.Web.Pages.Admin.Posts
         }
 
 
-        public void OnGet(Guid Id)
+        public async Task OnGet(Guid Id)
         {
-            BoardAd = boardExDbContext.BoardAds.Find(Id);
+            BoardAd = await boardExDbContext.BoardAds.FindAsync(Id);
 
         }
 
-        public IActionResult OnPostEdit()
+        public async Task<IActionResult> OnPostEdit()
         {
-            var existingBoardAd = boardExDbContext.BoardAds.Find(BoardAd.Id);
+            var existingBoardAd = await boardExDbContext.BoardAds.FindAsync(BoardAd.Id);
 
             if (existingBoardAd != null)
             {
@@ -40,18 +40,18 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 existingBoardAd.IsSold = BoardAd.IsSold;
             }
 
-            boardExDbContext.SaveChanges();
+            await boardExDbContext.SaveChangesAsync();
             return RedirectToPage("/admin/posts/list");
         }
 
-        public IActionResult OnPostDelete()
+        public async Task<IActionResult> OnPostDelete()
         {
-            var existingBoardAd = boardExDbContext.BoardAds.Find(BoardAd.Id);
+            var existingBoardAd = await boardExDbContext.BoardAds.FindAsync(BoardAd.Id);
 
             if (existingBoardAd != null)
             {
                 boardExDbContext.BoardAds.Remove(existingBoardAd);
-                boardExDbContext.SaveChanges();
+                await boardExDbContext.SaveChangesAsync();
 
                 return RedirectToPage("/admin/posts/list");
             }

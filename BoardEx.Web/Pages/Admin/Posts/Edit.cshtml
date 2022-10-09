@@ -10,7 +10,8 @@
 	</div>
 </div>
 
-
+@if (Model.BoardAd != null)
+{
 	<div>
 		<div class="container">
 			<form method="post">
@@ -69,3 +70,10 @@
 			</form>
 		</div>
 	</div>
+}
+else
+{
+	<div class="container">
+		<p>Board Ad Not Found!</p>
+	</div>
+}
