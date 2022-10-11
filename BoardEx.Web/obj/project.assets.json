@@ -118,7 +118,7 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/6.0.9": {
+      "Microsoft.EntityFrameworkCore.Analyzers/6.0.10": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -986,17 +986,17 @@
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/6.0.9": {
-      "sha512": "rNIx4fr7KWH4ypghhI+78PhCUYBHdjVbQ3yKvj/KmUIe4d9pysHXT3lF9TuReVdMDsn5mEx+3Yez8s80J4/JLA==",
+    "Microsoft.EntityFrameworkCore.Analyzers/6.0.10": {
+      "sha512": "b4jKcjo6BLuBRjLTkZPjJCvZ7oa3a798Q1AXSMAknitpBEOEIDryyRd7XZ0cnEIVCvfSND+Trgb00Z4TiTqOvg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/6.0.9",
+      "path": "microsoft.entityframeworkcore.analyzers/6.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "lib/netstandard2.0/_._",
-        "microsoft.entityframeworkcore.analyzers.6.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.6.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
@@ -2007,24 +2007,30 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Microsoft.EntityFrameworkCore.Analyzers >= 6.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.9"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\krupa\\.nuget\\packages\\": {}
+    "C:\\Users\\Mantas\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\krupa\\Desktop\\grupinis projektas\\PSI-I-4gr-BoardEx\\New folder\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
+      "projectUniqueName": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
       "projectName": "BoardEx.Web",
-      "projectPath": "C:\\Users\\krupa\\Desktop\\grupinis projektas\\PSI-I-4gr-BoardEx\\New folder\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
-      "packagesPath": "C:\\Users\\krupa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\krupa\\Desktop\\grupinis projektas\\PSI-I-4gr-BoardEx\\New folder\\PSI-I-4gr-BoardEx\\BoardEx.Web\\obj\\",
+      "projectPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
+      "packagesPath": "C:\\Users\\Mantas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\krupa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mantas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2032,6 +2038,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2050,6 +2057,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[6.0.10, )"
+          },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[6.0.9, )"
