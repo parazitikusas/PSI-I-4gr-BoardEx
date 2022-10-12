@@ -6,12 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<BoardExDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("BoardExDbConnectionString")));
 
 builder.Services.AddScoped<IBoardAdRepository, BoardAdRepository>();        // inject implementation of interface
+builder.Services.AddScoped<IImageRepository, ImageRepositoryCloudinary>();
 
 var app = builder.Build();
 
@@ -31,5 +33,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();
