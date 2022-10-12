@@ -2209,24 +2209,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mantas\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\krupa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
+      "projectUniqueName": "C:\\Users\\krupa\\Desktop\\grupinis projektas\\PSI-I-4gr-BoardEx\\New folder\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
       "projectName": "BoardEx.Web",
-      "projectPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
-      "packagesPath": "C:\\Users\\Mantas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\obj\\",
+      "projectPath": "C:\\Users\\krupa\\Desktop\\grupinis projektas\\PSI-I-4gr-BoardEx\\New folder\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
+      "packagesPath": "C:\\Users\\krupa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\krupa\\Desktop\\grupinis projektas\\PSI-I-4gr-BoardEx\\New folder\\PSI-I-4gr-BoardEx\\BoardEx.Web\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Mantas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\krupa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2234,7 +2229,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
