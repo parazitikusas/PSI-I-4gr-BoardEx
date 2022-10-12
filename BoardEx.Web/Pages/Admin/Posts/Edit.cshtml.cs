@@ -66,6 +66,10 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public async Task<IActionResult> OnPostDelete()
         {
+            var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+            using StreamWriter logFile = new(file, append: true);
+            await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Ištrintas skelbimas");
+
             var deleted = await boardAdRepository.DeleteAsync(BoardAd.Id);
             if (deleted)
             {
