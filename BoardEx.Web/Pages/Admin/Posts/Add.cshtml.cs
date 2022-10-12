@@ -15,6 +15,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
         [BindProperty]
         public AddBoardAd AddBoardAdRequest { get; set; }
 
+        [BindProperty]
+        public IFormFile FeaturedImage { get; set; }
+
         public AddModel(IBoardAdRepository boardAdRepository)
         {
             this.boardAdRepository = boardAdRepository;

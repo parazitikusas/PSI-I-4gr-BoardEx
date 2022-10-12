@@ -17,6 +17,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
         [BindProperty]
         public BoardAd BoardAd { get; set; }
 
+        [BindProperty]
+        public IFormFile FeaturedImage { get; set; }
+
         public EditModel(IBoardAdRepository boardAdRepository)
         {
             this.boardAdRepository = boardAdRepository;
@@ -32,8 +35,6 @@ namespace BoardEx.Web.Pages.Admin.Posts
         {
             try
             {
-                //throw new Exception();
-
                 await boardAdRepository.UpdateAsync(BoardAd);
 
                 var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
@@ -46,7 +47,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
                     Type = Enums.NotificationType.Success
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
                 using StreamWriter logFile = new(file, append: true);
