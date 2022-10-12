@@ -43,6 +43,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             await boardAdRepository.AddAsync(boardAd);
 
+
             var notification = new Notification
             {
                 Type = Enums.NotificationType.Success,
@@ -50,6 +51,12 @@ namespace BoardEx.Web.Pages.Admin.Posts
             };
 
             TempData["Notification"] = JsonSerializer.Serialize(notification);
+
+            //await boardAdRepository.UpdateAsync(boardAd);
+
+            var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+            using StreamWriter logFile = new(file, append: true);
+            await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Sukurtas naujas skelbimas ID: " + (boardAd.Id));
 
             return RedirectToPage("/admin/posts/list");
         }

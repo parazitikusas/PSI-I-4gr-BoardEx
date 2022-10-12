@@ -36,7 +36,11 @@ namespace BoardEx.Web.Pages.Admin.Posts
             try
             {
                 await boardAdRepository.UpdateAsync(BoardAd);
-                
+
+                var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+                using StreamWriter logFile = new(file, append: true);
+                await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Atnaujintas skelbimas ID: " + (BoardAd.Id));
+
                 ViewData["Notification"] = new Notification
                 {
                     Message = "Sėkmingai atnaujinta!",
@@ -45,6 +49,10 @@ namespace BoardEx.Web.Pages.Admin.Posts
             }
             catch (Exception ex)
             {
+                var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+                using StreamWriter logFile = new(file, append: true);
+                await logFile.WriteLineAsync("<br/>" + DateTime.Now + "Nepavyko atnaujinti skelbimo ID: " + (BoardAd.Id));
+
                 ViewData["Notification"] = new Notification
                 {
                     Message = "Ooops! Kažkas negerai!",
@@ -62,6 +70,10 @@ namespace BoardEx.Web.Pages.Admin.Posts
             var deleted = await boardAdRepository.DeleteAsync(BoardAd.Id);
             if (deleted)
             {
+                var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+                using StreamWriter logFile = new(file, append: true);
+                await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Ištrintas skelbimas ID: " + (BoardAd.Id));
+
                 var notification = new Notification
                 {
                     Type = Enums.NotificationType.Success,
