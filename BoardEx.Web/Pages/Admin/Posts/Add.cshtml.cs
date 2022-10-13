@@ -26,6 +26,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public void OnGet()
         {
+
         }
 
         public async Task<IActionResult> OnPost()
@@ -51,9 +52,15 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 };
 
                 TempData["Notification"] = JsonSerializer.Serialize(notf);
+
+                var notificationJson = (string)TempData["Notification"];
+                if (notificationJson != null)
+                {
+                    ViewData["Notification"] = JsonSerializer.Deserialize<Notification>(notificationJson);
+                }
+
                 return Page();
             }
-
 
             await boardAdRepository.AddAsync(boardAd);
 
@@ -77,7 +84,6 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public bool nameFormatCheck (String name) {
 
-            //if (!Regex.Match(name, "^[A-Z][a-zA-Z]*\040[A-Z][a-zA-Z]*.$").Success)
             if (!Regex.Match(name, "^[A-Z][a-zA-Z]*\\s[A-Z][a-zA-Z]*$").Success)
             {
                 return false;
