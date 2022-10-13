@@ -5,6 +5,7 @@ using BoardEx.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
@@ -41,13 +42,26 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 IsSold = AddBoardAdRequest.IsSold
             };
 
+            if (!nameFormatCheck(AddBoardAdRequest.Author))
+            {
+                var notf = new Notification
+                {
+                    Type = Enums.NotificationType.Error,
+                    Message = "Blogas vardo formatas!"
+                };
+
+                TempData["Notification"] = JsonSerializer.Serialize(notf);
+                return Page();
+            }
+
+
             await boardAdRepository.AddAsync(boardAd);
 
 
             var notification = new Notification
             {
                 Type = Enums.NotificationType.Success,
-                Message = "Skelbimas sėkmingai pridėtas!"
+                Message = "Skelbimas sėkmingai pridėtas!!"
             };
 
             TempData["Notification"] = JsonSerializer.Serialize(notification);
@@ -59,6 +73,19 @@ namespace BoardEx.Web.Pages.Admin.Posts
             await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Sukurtas naujas skelbimas ID: " + (boardAd.Id));
 
             return RedirectToPage("/admin/posts/list");
+        }
+
+        public bool nameFormatCheck (String name) {
+
+            //if (!Regex.Match(name, "^[A-Z][a-zA-Z]*\040[A-Z][a-zA-Z]*.$").Success)
+            if (!Regex.Match(name, "^[A-Z][a-zA-Z]*\\s[A-Z][a-zA-Z]*$").Success)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
