@@ -4,6 +4,7 @@ using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -36,6 +37,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 Name = AddBoardAdRequest.Name,
                 City = AddBoardAdRequest.City,
                 Content = AddBoardAdRequest.Content,
+                UrlHandler = convert(AddBoardAdRequest.Name),
                 Price = AddBoardAdRequest.Price,
                 FeaturedImageUrl = AddBoardAdRequest.FeaturedImageUrl,
                 PublishedDate = AddBoardAdRequest.PublishedDate,
@@ -93,5 +95,29 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 return true;
             }
         }
+
+        public string convert(String name)
+        {
+            char[] charArr = name.ToCharArray();
+            for (int i = 0; i < charArr.Length; i++)
+            {
+
+                if (charArr[charArr.Length - 1] == ' ')
+                {
+                    List<char> list = new List<char>(charArr);
+                    list.RemoveAt(charArr.Length - 1);
+                    charArr = list.ToArray();
+                }
+                if (charArr[i] == ' ')
+                {
+                    charArr[i] = '-';
+                }
+                
+            }
+            
+            name = new string(charArr);
+            return name;
+        }
+
     }
 }
