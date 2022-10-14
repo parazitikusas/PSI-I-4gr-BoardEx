@@ -53,6 +53,7 @@ namespace BoardEx.Web.Repositories
                 existingBoardAd.City = boardAd.City;
                 existingBoardAd.Content = boardAd.Content;
                 existingBoardAd.Price = boardAd.Price;
+                existingBoardAd.UrlHandler = boardAd.UrlHandler;
                 existingBoardAd.FeaturedImageUrl = boardAd.FeaturedImageUrl;
                 existingBoardAd.PublishedDate = boardAd.PublishedDate;
                 existingBoardAd.Author = boardAd.Author;
