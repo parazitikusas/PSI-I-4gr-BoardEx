@@ -23,9 +23,11 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public async Task OnGet()
         {
-            var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
-            using StreamWriter logFile = new(file, append: true);
-            await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Perþiûrëti visi skelbimai");
+            LogsModel logsModel = new LogsModel();
+
+
+            logsModel.createLog(" Perþiûrëti visi skelbimai ");
+
 
             var notificationJson = (string)TempData["Notification"];
             if (notificationJson != null)
