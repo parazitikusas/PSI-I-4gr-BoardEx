@@ -32,12 +32,15 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public async Task<IActionResult> OnPost()
         {
+
+            LogsModel logsModel = new LogsModel();
+
             var boardAd = new BoardAd()
             {
                 Name = AddBoardAdRequest.Name,
                 City = AddBoardAdRequest.City,
                 Content = AddBoardAdRequest.Content,
-                UrlHandler = convert(AddBoardAdRequest.Name),
+                UrlHandler = convert(name: AddBoardAdRequest.Name),
                 Price = AddBoardAdRequest.Price,
                 FeaturedImageUrl = AddBoardAdRequest.FeaturedImageUrl,
                 PublishedDate = AddBoardAdRequest.PublishedDate,
@@ -64,6 +67,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 return Page();
             }
 
+
             await boardAdRepository.AddAsync(boardAd);
 
 
@@ -77,14 +81,17 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             //await boardAdRepository.UpdateAsync(boardAd);
 
-            var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
-            using StreamWriter logFile = new(file, append: true);
-            await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Sukurtas naujas skelbimas ID: " + (boardAd.Id));
+            //var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
+            //using StreamWriter logFile = new(file, append: true);
+            //await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Sukurtas naujas skelbimas ID: " + (boardAd.Id));
+
+
+            logsModel.createLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString());
 
             return RedirectToPage("/admin/posts/list");
         }
 
-        public bool nameFormatCheck (String name) {
+        public bool nameFormatCheck (String name) { // tikrina skelbimo autoriaus vardo formata
 
             if (!Regex.Match(name, "^[A-Z][a-zA-Z]*\\s[A-Z][a-zA-Z]*$").Success)
             {
@@ -96,7 +103,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
             }
         }
 
-        public string convert(String name)
+        public string convert(String name) // konvertuoja zaidimo pavadinima i tinkama formata linkui
         {
             char[] charArr = name.ToCharArray();
             for (int i = 0; i < charArr.Length; i++)
