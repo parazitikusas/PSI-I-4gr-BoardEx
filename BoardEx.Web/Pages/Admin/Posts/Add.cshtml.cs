@@ -46,7 +46,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 UrlHandler = convert(name: AddBoardAdRequest.Name),
                 Price = AddBoardAdRequest.Price,
                 FeaturedImageUrl = AddBoardAdRequest.FeaturedImageUrl,
-                PublishedDate = AddBoardAdRequest.PublishedDate,
+                PublishedDate = DateTime.Today,
                 Author = AddBoardAdRequest.Author,
                 IsSold = AddBoardAdRequest.IsSold,
                 Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() {  Name = x.Trim() }))
