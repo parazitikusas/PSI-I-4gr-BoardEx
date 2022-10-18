@@ -35,22 +35,31 @@ namespace BoardEx.Web.Repositories
 
         public async Task<IEnumerable<BoardAd>> GetAllAsync()
         {
-            return await boardExDbContext.BoardAds.ToListAsync();
+            return await boardExDbContext.BoardAds.Include(nameof(BoardAd.Tags)).ToListAsync();
+        }
+
+        public async Task<IEnumerable<BoardAd>> GetAllAsync(string tagName)
+        {
+            return await (boardExDbContext.BoardAds.Include(nameof(BoardAd.Tags))
+                .Where(x => x.Tags.Any(x => x.Name == tagName)))
+                .ToListAsync();
         }
 
         public async Task<BoardAd> GetAsync(Guid id)
         {
-            return await boardExDbContext.BoardAds.FindAsync(id);
+            return await boardExDbContext.BoardAds.Include(nameof(BoardAd.Tags))
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<BoardAd> GetAsync(string urlHandler)
         {
-            return await boardExDbContext.BoardAds.FirstOrDefaultAsync(x => x.UrlHandler == urlHandler);
+            return await boardExDbContext.BoardAds.Include(nameof(BoardAd.Tags))
+                .FirstOrDefaultAsync(x => x.UrlHandler == urlHandler);
         }
 
         public async Task<BoardAd> UpdateAsync(BoardAd boardAd)
         {
-            var existingBoardAd = await boardExDbContext.BoardAds.FindAsync(boardAd.Id);
+            var existingBoardAd = await boardExDbContext.BoardAds.Include(nameof(BoardAd.Tags)).FirstOrDefaultAsync(x => x.Id == boardAd.Id);
 
             if (existingBoardAd != null)
             {
@@ -63,6 +72,19 @@ namespace BoardEx.Web.Repositories
                 existingBoardAd.PublishedDate = boardAd.PublishedDate;
                 existingBoardAd.Author = boardAd.Author;
                 existingBoardAd.IsSold = boardAd.IsSold;
+                
+   
+                if (boardAd.Tags != null && boardAd.Tags.Any())
+                {
+                    // Delete the existing tags
+                    boardExDbContext.Tags.RemoveRange(existingBoardAd.Tags);
+
+                    // Add new tags
+                    boardAd.Tags.ToList().ForEach(x => x.BoardAdId = existingBoardAd.Id);
+
+                    await boardExDbContext.Tags.AddRangeAsync(boardAd.Tags);
+                }
+
             }
 
             await boardExDbContext.SaveChangesAsync();

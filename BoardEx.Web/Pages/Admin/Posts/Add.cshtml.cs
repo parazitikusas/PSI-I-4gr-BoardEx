@@ -20,6 +20,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
         [BindProperty]
         public IFormFile FeaturedImage { get; set; }
 
+        [BindProperty]
+        public string Tags { get; set; }
+
         public AddModel(IBoardAdRepository boardAdRepository)
         {
             this.boardAdRepository = boardAdRepository;
@@ -45,7 +48,8 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 FeaturedImageUrl = AddBoardAdRequest.FeaturedImageUrl,
                 PublishedDate = AddBoardAdRequest.PublishedDate,
                 Author = AddBoardAdRequest.Author,
-                IsSold = AddBoardAdRequest.IsSold
+                IsSold = AddBoardAdRequest.IsSold,
+                Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() {  Name = x.Trim() }))
             };
 
             if (!nameFormatCheck(AddBoardAdRequest.Author))

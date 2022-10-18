@@ -20,6 +20,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
         [BindProperty]
         public IFormFile FeaturedImage { get; set; }
 
+        [BindProperty]
+        public string Tags { get; set; }
+
         public EditModel(IBoardAdRepository boardAdRepository)
         {
             this.boardAdRepository = boardAdRepository;
@@ -29,6 +32,11 @@ namespace BoardEx.Web.Pages.Admin.Posts
         public async Task OnGet(Guid Id)
         {
             BoardAd = await boardAdRepository.GetAsync(Id);
+
+            if (BoardAd != null && BoardAd.Tags != null)
+            {
+                Tags = String.Join(',', BoardAd.Tags.Select(x => x.Name));
+            }
         }
 
         public async Task<IActionResult> OnPostEdit()               // reikėtų padaryti, kad po sėkimingo atnaujinimo, redirectintu į listą ir ten rašytu notificationa.
@@ -40,6 +48,8 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             try
             {
+                BoardAd.Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() { Name = x.Trim() }));
+
                 await boardAdRepository.UpdateAsync(BoardAd);
 
                 logsModel.createLog(" Atnaujintas skelbimas ID: ", BoardAd.Id.ToString());

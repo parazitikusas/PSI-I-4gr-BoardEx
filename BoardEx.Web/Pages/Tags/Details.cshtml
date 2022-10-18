@@ -1,43 +1,14 @@
-﻿@page
-@model IndexModel
+﻿@page "/kategorijos/{tagName}"
+@model BoardEx.Web.Pages.Tags.DetailsModel
 @{
-    ViewData["Title"] = "Home page";
 }
 
-<div class="container col-xxl-8 px-4 py-5">
-    <div class="row align-items-center g-5 py-5">
-        <div class="col-12 col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">
-                BoardEx
-            </h1>
-            <p class="lead">
-                Stalo žaidimų keitimosi platforma.
-            </p>
-        </div>
-        <div class="col-12 col-lg-6">
-            <img src="https://images.pexels.com/photos/776654/pexels-photo-776654.jpeg?cs=srgb&dl=pexels-ylanite-koppens-776654.jpg&fm=jpg"
-                 class="d-block mx-lg-auto img-fluid" width="400" />
-        </div>
-    </div>
-</div>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
 
             <h2 class="mb-5 display-3">Skelbimai</h2>
-
-            <div class="mb-5">
-                @if (Model.Tags != null && Model.Tags.Any())
-                {
-                    foreach (var tag in Model.Tags)
-                    {
-                        <a href="/kategorijos/@tag.Name">
-                            <span class="badge bg-dark">@tag.Name</span>
-                        </a>
-                    }
-                }
-            </div>
 
             @if (Model.Boards != null && Model.Boards.Any())
             {

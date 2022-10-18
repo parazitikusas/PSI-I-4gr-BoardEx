@@ -17,6 +17,18 @@
 					<span class="text-secondary">@Model.BoardAd.PublishedDate.ToShortDateString()</span>
 				</div>
 
+				<div class="mb-3">
+					@if (Model.BoardAd.Tags != null)
+					{
+						foreach (var tag in Model.BoardAd.Tags)
+						{
+							<a href="/kategorijos/@tag.Name">
+								<span class="badge bg-dark">@tag.Name</span>
+							</a>
+						}
+					}
+				</div>
+
 				<img src="@Model.BoardAd.FeaturedImageUrl" class="d-block img-fluid mb-3"/>
 
 				<div class="mb-3 board-details">
