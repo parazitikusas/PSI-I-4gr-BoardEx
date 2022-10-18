@@ -4,17 +4,48 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-  <div class="container pl-4 pr-4">
-    <div class="mt-3">
-      <h1>BoardEx</h1>
-        <p>Board game exchange site.</p>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">
+                BoardEx
+            </h1>
+            <p class="lead">
+                Stalo žaidimų keitimosi platforma.
+            </p>
+        </div>
+        <div class="col-12 col-lg-6">
+            <img src="https://images.pexels.com/photos/776654/pexels-photo-776654.jpeg?cs=srgb&dl=pexels-ylanite-koppens-776654.jpg&fm=jpg"
+                 class="d-block mx-lg-auto img-fluid" width="400" />
+        </div>
     </div>
-    <div class="text-center">
-      <a class="button btn mt-3 col-12 col-sm-auto" href="/Index" role="button">Home</a>
-      <a class="button btn mt-3 col-12 col-sm-auto ml-sm-3 mr-sm-3" href="/Admin/logs" role="button">Logs</a>
-      <a class="button btn mt-3 col-12 col-sm-auto mr-3" href="/Admin/Posts/Add" role="button">Add</a>
-      <a class="button btn mt-3 col-12 col-sm-auto" href="/Admin/Posts/List" role="button">List</a>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+
+            <h2 class="mb-5 display-3">Skelbimai</h2>
+
+            @if (Model.Boards != null && Model.Boards.Any())
+            {
+                foreach (var boardAd in Model.Boards)
+                {
+                    <div class="mb-5 bg-light box-shadow">
+                        <img src="@boardAd.FeaturedImageUrl" alt="@boardAd.Name" class="mb-2 d-block img-fluid" />
+                        <div class="px-4 py-4">
+                            <h2 class="mb-2">@boardAd.Name</h2>
+                            <p>
+                                Autorius: @boardAd.Author
+                                <br />
+                                Skelbimas įkeltas: @boardAd.PublishedDate.ToShortDateString()
+                            </p>
+                            <p class="mb-2">@Html.Raw(boardAd.Content)</p>
+                            <a href="/skelbimai/@boardAd.UrlHandler" class="btn btn-dark">Žiūrėti daugiau</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
     </div>
-  </div>
 </div>

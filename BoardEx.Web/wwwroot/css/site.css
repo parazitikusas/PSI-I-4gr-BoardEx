@@ -33,3 +33,6 @@ body {
   margin-bottom: 60px;
 }
 
+.board-details img {
+    max-width: 100%;
+}

@@ -43,6 +43,11 @@ namespace BoardEx.Web.Repositories
             return await boardExDbContext.BoardAds.FindAsync(id);
         }
 
+        public async Task<BoardAd> GetAsync(string urlHandler)
+        {
+            return await boardExDbContext.BoardAds.FirstOrDefaultAsync(x => x.UrlHandler == urlHandler);
+        }
+
         public async Task<BoardAd> UpdateAsync(BoardAd boardAd)
         {
             var existingBoardAd = await boardExDbContext.BoardAds.FindAsync(boardAd.Id);
