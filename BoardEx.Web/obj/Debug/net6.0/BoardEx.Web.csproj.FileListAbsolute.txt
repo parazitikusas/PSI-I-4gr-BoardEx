@@ -149,3 +149,6 @@ C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\
 C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\BoardEx.Web.csproj.CopyComplete
 C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\BoardEx.Web.genruntimeconfig.cache
 C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\ref\BoardEx.Web.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\CloudinaryDotNet.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
