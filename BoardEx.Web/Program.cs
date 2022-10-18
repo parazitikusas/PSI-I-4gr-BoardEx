@@ -14,6 +14,7 @@ builder.Services.AddDbContext<BoardExDbContext>(options =>
 
 builder.Services.AddScoped<IBoardAdRepository, BoardAdRepository>();        // inject implementation of interface
 builder.Services.AddScoped<IImageRepository, ImageRepositoryCloudinary>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 
 var app = builder.Build();
 

@@ -56,6 +56,11 @@
 				<input type="text" class="form-control" id="author" asp-for="AddBoardAdRequest.Author">
 			</div>
 
+			<div class="mb-3">
+				<label for="" class="form-label">Kategorijos (atskirti kableliais)</label>
+				<input type="text" class="form-control" id="tags" asp-for="Tags"/>
+			</div>
+
 			<div class="form-check mb-3">
 				<input class="form-check-input" type="checkbox" id="isSold" asp-for="AddBoardAdRequest.IsSold" />
 				<label for="isSold" class="form-check-label">

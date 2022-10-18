@@ -1,0 +1,45 @@
+﻿@page	"/skelbimai/{urlHandler}"
+@model BoardEx.Web.Pages.Board.DetailsModel
+@{
+	ViewData["Title"] = Model.BoardAd.Name;
+}
+
+<div class="container my-5">
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-6">
+
+			@if (Model.BoardAd != null)
+			{
+				<h1 class="mb-3">@Model.BoardAd.Name</h1>
+
+				<div class="d-flex justify-content-between">
+					<span class="text-secondary">@Model.BoardAd.Author</span>
+					<span class="text-secondary">@Model.BoardAd.PublishedDate.ToShortDateString()</span>
+				</div>
+
+				<div class="mb-3">
+					@if (Model.BoardAd.Tags != null)
+					{
+						foreach (var tag in Model.BoardAd.Tags)
+						{
+							<a href="/kategorijos/@tag.Name">
+								<span class="badge bg-dark">@tag.Name</span>
+							</a>
+						}
+					}
+				</div>
+
+				<img src="@Model.BoardAd.FeaturedImageUrl" class="d-block img-fluid mb-3"/>
+
+				<div class="mb-3 board-details">
+					@Html.Raw(Model.BoardAd.Content)
+				</div>
+			}
+			else
+			{
+				<h2>Atspirašau.... toks skelbimas neegzistuoja!</h2>
+			}
+
+		</div>
+	</div>
+</div>
