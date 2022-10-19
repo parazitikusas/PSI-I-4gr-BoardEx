@@ -85,12 +85,11 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             //await boardAdRepository.UpdateAsync(boardAd);
 
-            //var file = System.IO.Path.Combine(Environment.CurrentDirectory, "./logs/logs.txt");
-            //using StreamWriter logFile = new(file, append: true);
-            //await logFile.WriteLineAsync("<br/>" + DateTime.Now + " Sukurtas naujas skelbimas ID: " + (boardAd.Id));
+            //logsModel.createLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString()); // kvieciamas logsu sukurimo METODAS SU OPTIONAL parameter.
 
+            ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
 
-            logsModel.createLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString());
+            //boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
 
             return RedirectToPage("/admin/posts/list");
         }
