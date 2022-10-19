@@ -4,9 +4,9 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="container col-xxl-8 px-4 py-5">
+<div class="container jumbotron col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-5 py-5">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 ">
             <h1 class="display-5 fw-bold lh-1 mb-3">
                 BoardEx
             </h1>
@@ -26,8 +26,9 @@
         <div class="col-6">
 
             <h2 class="mb-5 display-3">Skelbimai</h2>
+            <br/>
 
-            <div class="mb-5">
+            <!--<div class="mb-5">
                 @if (Model.Tags != null && Model.Tags.Any())
                 {
                     foreach (var tag in Model.Tags)
@@ -37,15 +38,15 @@
                         </a>
                     }
                 }
-            </div>
+            </div>-->
 
             @if (Model.Boards != null && Model.Boards.Any())
             {
                 foreach (var boardAd in Model.Boards)
                 {
-                    <div class="mb-5 bg-light box-shadow">
+                    <div class="card card-border-css mb-5 bg-light box-shadow">
                         <img src="@boardAd.FeaturedImageUrl" alt="@boardAd.Name" class="mb-2 d-block img-fluid" />
-                        <div class="px-4 py-4">
+                        <div class="card-body card-header-color px-4 py-4">
                             <h2 class="mb-2">@boardAd.Name</h2>
                             <p>
                                 Autorius: @boardAd.Author
@@ -54,6 +55,17 @@
                             </p>
                             <p class="mb-2">@Html.Raw(boardAd.Content)</p>
                             <a href="/skelbimai/@boardAd.UrlHandler" class="btn btn-dark">Žiūrėti daugiau</a>
+                            <div class="mt-2">
+                            @if (Model.Tags != null && Model.Tags.Any())
+                            {
+                                foreach (var tag in Model.Tags)
+                                {
+                                    <a href="/kategorijos/@tag.Name">
+                                        <span class="badge bg-dark">@tag.Name</span>
+                                    </a>
+                                }
+                            }
+                            </div>
                         </div>
                     </div>
                 }

@@ -55,19 +55,4 @@
 <br/>10/18/2022 7:05:52 PM Perþiûrëti visi skelbimai 
 <br/>10/18/2022 7:18:23 PM Perþiûrëti visi skelbimai 
 <br/>10/18/2022 7:18:32 PM Atnaujintas skelbimas ID: bd2532b6-97ea-400c-3193-08dab122a1c7
-<br/>10/18/2022 10:49:31 PM Sukurtas naujas skelbimas ID: 747ed30c-12db-4380-e8e1-08dab141dfa3
-<br/>10/18/2022 10:49:31 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 10:50:45 PM Sukurtas naujas skelbimas ID: 14653013-79d2-4ac0-e8e2-08dab141dfa3
-<br/>10/18/2022 10:50:45 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 10:58:49 PM Sukurtas naujas skelbimas ID: 0b5b3c04-da8b-40ab-523e-08dab1432c26
-<br/>10/18/2022 10:58:49 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 10:59:12 PM Sukurtas naujas skelbimas ID: d9d111e0-59e6-4758-523f-08dab1432c26
-<br/>10/18/2022 10:59:12 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 11:01:52 PM Sukurtas naujas skelbimas ID: d815bc86-979a-44e1-bee1-08dab1439973
-<br/>10/18/2022 11:01:52 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 11:02:10 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 11:03:37 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 11:03:50 PM Atnaujintas skelbimas ID: 0b5b3c04-da8b-40ab-523e-08dab1432c26
-<br/>10/18/2022 11:06:22 PM Peržiūrėti visi skelbimai 
-<br/>10/18/2022 11:06:29 PM Ištrintas skelbimas ID: d9d111e0-59e6-4758-523f-08dab1432c26
-<br/>10/18/2022 11:06:29 PM Peržiūrėti visi skelbimai 
+

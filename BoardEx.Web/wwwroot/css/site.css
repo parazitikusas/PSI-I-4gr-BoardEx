@@ -30,9 +30,35 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #DBD3C5 !important;
 }
 
 .board-details img {
     max-width: 100%;
 }
+
+.card-header-color {
+    background: #69778C !important;
+}
+
+.navbar-footer-color {
+    border-bottom: 0px !important;
+    border-top: 0px !important;
+    background: #524853 !important;
+}
+
+.card-border-css {
+    border-color: #212034 !important;
+    border-width: 2px !important;
+}
+
+
+.jumbotron {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: url("https://images.pexels.com/photos/776654/pexels-photo-776654.jpeg?cs=srgb&dl=pexels-ylanite-koppens-776654.jpg&fm=jpg");
+}
+
