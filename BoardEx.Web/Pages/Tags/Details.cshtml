@@ -10,6 +10,18 @@
 
             <h2 class="mb-5 display-3">Skelbimai</h2>
 
+            <div class="mb-5">
+                @if (Model.Tags != null && Model.Tags.Any())
+                {
+                    foreach (var tag in Model.Tags)
+                    {
+                        <a href="/kategorijos/@tag.Name">
+                            <span class="badge bg-dark">@tag.Name</span>
+                        </a>
+                    }
+                }
+            </div>
+
             @if (Model.Boards != null && Model.Boards.Any())
             {
                 foreach (var boardAd in Model.Boards)
