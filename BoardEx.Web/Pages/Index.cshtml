@@ -28,7 +28,11 @@
             <h2 class="mb-5 display-3">Skelbimai</h2>
             <br/>
 
-            <!--<div class="mb-5">
+           
+
+            @if (Model.Boards != null && Model.Boards.Any())
+            { 
+                <div class="mb-5">
                 @if (Model.Tags != null && Model.Tags.Any())
                 {
                     foreach (var tag in Model.Tags)
@@ -38,12 +42,10 @@
                         </a>
                     }
                 }
-            </div>-->
-
-            @if (Model.Boards != null && Model.Boards.Any())
-            {
+                </div>
                 foreach (var boardAd in Model.Boards)
                 {
+                    
                     <div class="card card-border-css mb-5 bg-light box-shadow">
                         <img src="@boardAd.FeaturedImageUrl" alt="@boardAd.Name" class="mb-2 d-block img-fluid" />
                         <div class="card-body card-header-color px-4 py-4">
@@ -55,17 +57,6 @@
                             </p>
                             <p class="mb-2">@Html.Raw(boardAd.Content)</p>
                             <a href="/skelbimai/@boardAd.UrlHandler" class="btn btn-dark">Žiūrėti daugiau</a>
-                            <div class="mt-2">
-                            @if (Model.Tags != null && Model.Tags.Any())
-                            {
-                                foreach (var tag in Model.Tags)
-                                {
-                                    <a href="/kategorijos/@tag.Name">
-                                        <span class="badge bg-dark">@tag.Name</span>
-                                    </a>
-                                }
-                            }
-                            </div>
                         </div>
                     </div>
                 }

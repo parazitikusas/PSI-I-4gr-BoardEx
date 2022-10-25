@@ -87,9 +87,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             //logsModel.createLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString()); // kvieciamas logsu sukurimo METODAS SU OPTIONAL parameter.
 
-            ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
+            //ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
 
-            //boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
+            boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
 
             return RedirectToPage("/admin/posts/list");
         }

@@ -14,9 +14,9 @@
             {
                 foreach (var boardAd in Model.Boards)
                 {
-                    <div class="mb-5 bg-light box-shadow">
+                    <div class="card card-border-css mb-5 bg-light box-shadow">
                         <img src="@boardAd.FeaturedImageUrl" alt="@boardAd.Name" class="mb-2 d-block img-fluid" />
-                        <div class="px-4 py-4">
+                        <div class="card-body card-header-color px-4 py-4">
                             <h2 class="mb-2">@boardAd.Name</h2>
                             <p>
                                 Autorius: @boardAd.Author
