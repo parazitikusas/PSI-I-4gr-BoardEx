@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BoardEx.Web.Pages.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class LogsModel : PageModel
     {
         private IHostingEnvironment env;
