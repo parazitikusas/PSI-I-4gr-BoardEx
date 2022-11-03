@@ -5,7 +5,7 @@ namespace BoardEx.Web.Data
 {
     public class BoardExDbContext : DbContext
     {
-        public BoardExDbContext(DbContextOptions options) : base(options)
+        public BoardExDbContext(DbContextOptions<BoardExDbContext> options) : base(options)
         {
         }
 

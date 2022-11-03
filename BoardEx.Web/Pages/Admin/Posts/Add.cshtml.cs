@@ -2,6 +2,7 @@
 using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -10,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
+    [Authorize(Roles = "Admin")]
     public class AddModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;

@@ -2,6 +2,7 @@ using BoardEx.Web.Data;
 using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Text.Json;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
+    [Authorize(Roles = "Admin")]
     public class ListModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;
