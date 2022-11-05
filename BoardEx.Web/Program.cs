@@ -41,6 +41,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IBoardAdRepository, BoardAdRepository>();        // inject implementation of interface
 builder.Services.AddScoped<IImageRepository, ImageRepositoryCloudinary>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<IBoardAdLikeRepository, BoardAdLikeRepository>();
 
 var app = builder.Build();
 

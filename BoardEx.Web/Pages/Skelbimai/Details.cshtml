@@ -1,20 +1,48 @@
-﻿@page	"/skelbimai/{urlHandler}"
+﻿@page "/skelbimai/{urlHandler}"
 @model BoardEx.Web.Pages.Board.DetailsModel
-@{
-	ViewData["Title"] = Model.BoardAd.Name;
-}
 
-<div class="container my-5">
-	<div class="row justify-content-center">
-		<div class="col-12 col-lg-6">
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
+@inject SignInManager<IdentityUser> signInManager
 
-			@if (Model.BoardAd != null)
-			{
+@if (Model.BoardAd != null)
+{
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-6">
+				@{
+					ViewData["Title"] = Model.BoardAd.Name;
+				}
+
+
 				<h1 class="mb-3">@Model.BoardAd.Name</h1>
 
 				<div class="d-flex justify-content-between">
 					<span class="text-secondary">@Model.BoardAd.Author</span>
 					<span class="text-secondary">@Model.BoardAd.PublishedDate.ToShortDateString()</span>
+				</div>
+
+				<div class="mb-3">
+					<span>
+						@if (signInManager.IsSignedIn(User))
+						{
+							@if (Model.Liked)
+							{
+								<a style="cursor: pointer">
+									<i class="bi bi-hand-thumbs-up-fill"></i>
+								</a>
+							}
+							else
+							{
+								<a id="btnLike" style="cursor: pointer">
+									<i class="bi bi-hand-thumbs-up"></i>
+								</a>
+							}
+						}
+
+
+						<span id="totalLikes">@Model.TotalLikes</span> likes
+					</span>
 				</div>
 
 				<div class="mb-3">
@@ -29,17 +57,59 @@
 					}
 				</div>
 
-				<img src="@Model.BoardAd.FeaturedImageUrl" class="d-block img-fluid mb-3"/>
+				<img src="@Model.BoardAd.FeaturedImageUrl" class="d-block img-fluid mb-3" />
 
 				<div class="mb-3 board-details">
 					@Html.Raw(Model.BoardAd.Content)
 				</div>
-			}
-			else
-			{
-				<h2>Atspirašau.... toks skelbimas neegzistuoja!</h2>
-			}
-
+			</div>
 		</div>
 	</div>
-</div>
+	@section Scripts {
+	<script>
+		const btnLike = document.getElementById('btnLike');
+		const totalLikesElement = document.getElementById('totalLikes');
+
+		async function getTotalLikes() {
+			fetch('/api/boardadlike/@Model.BoardAd.Id/totallikes', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': '*/*'
+				}
+			})
+				.then(data => data.json())
+				.then(result => totalLikesElement.innerHTML = result);
+		}
+
+
+		async function addLikeForBoard() {
+
+			fetch('/api/boardadlike/add', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': '*/*'
+				},
+				body: JSON.stringify({ boardAdId: '@Model.BoardAd.Id', userId: '@userManager.GetUserId(User)' })
+			})
+				.then(() => {
+					btnLike.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
+					btnLike.removeEventListener('click', addLikeForBoard);
+					getTotalLikes();
+
+				});
+
+		}
+
+		btnLike.addEventListener('click', addLikeForBoard);
+	</script>
+	}
+}
+else
+{
+	<h2>Atspirašau.... toks skelbimas neegzistuoja!</h2>
+}
+
+
+
