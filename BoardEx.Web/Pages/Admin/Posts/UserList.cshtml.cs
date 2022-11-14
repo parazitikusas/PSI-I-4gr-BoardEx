@@ -1,27 +1,22 @@
-﻿using BoardEx.Web.Data;
-using BoardEx.Web.Models.Domain;
+﻿using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
-    [Authorize(Roles = "Admin")]
-    public class ListModel : PageModel
+    public class UserListModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;
 
         public List<BoardAd> BoardAds { get; set; }
 
-        public ListModel(IBoardAdRepository boardAdRepository)
+        public UserListModel(IBoardAdRepository boardAdRepository)
         {
             this.boardAdRepository = boardAdRepository;
         }
-
 
         public async Task OnGet()
         {
