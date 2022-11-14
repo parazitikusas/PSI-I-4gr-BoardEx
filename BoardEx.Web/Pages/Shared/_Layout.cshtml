@@ -30,22 +30,28 @@
                             <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                aria-expanded="false" id="navbarDropdownAdmin">
-                                    Admin
+                                    Skelbimai
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
                                     <li>
-                                        <a class="dropdown-item" href="/admin/posts/add">Add New Board Game Post</a>
+                                        <a class="dropdown-item" href="/admin/posts/add">Pridėti naują skelbimą</a>
                                     </li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li>
+                                            <a class="dropdown-item" href="/admin/posts/list">Visi skelbimai (admin)</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/admin/logs">Logs</a>
+                                        </li>
+                                    }
                                     <li>
-                                        <a class="dropdown-item" href="/admin/posts/list">All Board Game Posts</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/admin/logs">Logs</a>
+                                        <a class="dropdown-item" href="/admin/posts/add">Jūsų skelbimai</a>
                                     </li>
                                 </ul>
                             </li>

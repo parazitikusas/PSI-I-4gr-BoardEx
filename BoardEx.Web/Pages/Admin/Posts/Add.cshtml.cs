@@ -3,6 +3,7 @@ using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -15,6 +16,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
     public class AddModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;
+        private readonly UserManager<IdentityUser> userManager;
 
         [BindProperty]
         public AddBoardAd AddBoardAdRequest { get; set; }
@@ -25,9 +27,10 @@ namespace BoardEx.Web.Pages.Admin.Posts
         [BindProperty]
         public string Tags { get; set; }
 
-        public AddModel(IBoardAdRepository boardAdRepository)
+        public AddModel(IBoardAdRepository boardAdRepository, UserManager<IdentityUser> userManager)
         {
             this.boardAdRepository = boardAdRepository;
+            this.userManager = userManager;
         }
 
         public void OnGet()
@@ -40,6 +43,8 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             LogsModel logsModel = new LogsModel();
 
+            var userId = userManager.GetUserId(User);
+
             var boardAd = new BoardAd()
             {
                 Name = AddBoardAdRequest.Name,
@@ -51,7 +56,8 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 PublishedDate = DateTime.Today,
                 Author = AddBoardAdRequest.Author,
                 IsSold = AddBoardAdRequest.IsSold,
-                Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() {  Name = x.Trim() }))
+                Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() {  Name = x.Trim() })),
+                UserId = Guid.Parse(userId)
             };
 
             if (!nameFormatCheck(AddBoardAdRequest.Author))
