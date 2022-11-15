@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXNzRGVuaWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Admin/Logs.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTG9ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -31,6 +35,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUG9zdHNcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Admin/Posts/UserList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUG9zdHNcVXNlckxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -39,8 +47,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Mantas/Documents/GitHub/PSI-I-4gr-BoardEx/BoardEx.Web/Pages/Shared/_Notification.cshtml]
