@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "User")]
     public class AddModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;
@@ -45,20 +45,48 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             var userId = userManager.GetUserId(User);
 
-            var boardAd = new BoardAd()
+            var boardAd = new BoardAd(){ };
+
+            try { //exception catch doesnt work needs fix
+                boardAd = new BoardAd()
+                {
+                    Name = AddBoardAdRequest.Name,
+                    City = AddBoardAdRequest.City,
+                    Content = AddBoardAdRequest.Content,
+                    UrlHandler = convert(name: AddBoardAdRequest.Name),
+                    Price = AddBoardAdRequest.Price,
+                    FeaturedImageUrl = AddBoardAdRequest.FeaturedImageUrl,
+                    PublishedDate = DateTime.Today,
+                    Author = AddBoardAdRequest.Author,
+                    IsSold = AddBoardAdRequest.IsSold,
+                    Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() { Name = x.Trim() })),
+                    UserId = Guid.Parse(userId)
+                }; 
+            }
+            catch (Exception ex)
             {
-                Name = AddBoardAdRequest.Name,
-                City = AddBoardAdRequest.City,
-                Content = AddBoardAdRequest.Content,
-                UrlHandler = convert(name: AddBoardAdRequest.Name),
-                Price = AddBoardAdRequest.Price,
-                FeaturedImageUrl = AddBoardAdRequest.FeaturedImageUrl,
-                PublishedDate = DateTime.Today,
-                Author = AddBoardAdRequest.Author,
-                IsSold = AddBoardAdRequest.IsSold,
-                Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() {  Name = x.Trim() })),
-                UserId = Guid.Parse(userId)
-            };
+                var notf = new Notification
+                {
+                    Type = Enums.NotificationType.Error,
+                    Message = "Užpildykite visus laukelius!"
+                };
+
+                TempData["Notification"] = JsonSerializer.Serialize(notf);
+
+                var notificationJson = (string)TempData["Notification"];
+                if (notificationJson != null)
+                {
+                    ViewData["Notification"] = JsonSerializer.Deserialize<Notification>(notificationJson);
+                }
+
+                return Page();
+            }
+            
+
+
+
+
+
 
             if (!nameFormatCheck(AddBoardAdRequest.Author))
             {
@@ -99,7 +127,8 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
 
-            return RedirectToPage("/admin/posts/list");
+            //return RedirectToPage("/admin/posts/list"); changed
+            return RedirectToPage("/admin/posts/userList");
         }
 
         public bool nameFormatCheck (String name) { // tikrina skelbimo autoriaus vardo formata
@@ -116,6 +145,10 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public string convert(String name) // konvertuoja zaidimo pavadinima i tinkama formata linkui
         {
+            if (name == null)
+            {
+                return null;
+            }
             char[] charArr = name.ToCharArray();
             for (int i = 0; i < charArr.Length; i++)
             {
