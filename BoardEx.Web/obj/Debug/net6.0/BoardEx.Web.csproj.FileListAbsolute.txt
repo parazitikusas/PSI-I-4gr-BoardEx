@@ -152,3 +152,8 @@ C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\
 C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\CloudinaryDotNet.dll
 C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\New folder\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\New folder\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\New folder\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\New folder\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\krupa\Desktop\grupinis projektas\PSI-I-4gr-BoardEx\New folder\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll

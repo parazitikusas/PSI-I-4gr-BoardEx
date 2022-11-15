@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "User")]
     public class EditModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;

@@ -12,5 +12,7 @@ namespace BoardEx.Web.Data
         public DbSet<BoardAd> BoardAds { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<BoardAdLike> BoardAdLike { get; set; }
+        public DbSet<BoardAdComment> BoardAdComment { get; set; }
     }
 }

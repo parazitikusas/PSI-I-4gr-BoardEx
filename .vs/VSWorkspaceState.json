@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\BoardEx.Web",
-    "\\BoardEx.Web\\Pages"
+    "\\BoardEx.Web\\Pages",
+    "\\BoardEx.Web\\Pages\\Shared"
   ],
-  "SelectedNode": "\\BoardEx.Web",
+  "SelectedNode": "\\BoardEx.Web\\Pages\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }

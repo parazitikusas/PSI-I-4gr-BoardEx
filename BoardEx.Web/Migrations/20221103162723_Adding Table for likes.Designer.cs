@@ -4,6 +4,7 @@ using BoardEx.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardEx.Web.Migrations
 {
     [DbContext(typeof(BoardExDbContext))]
-    partial class BoardExBloggieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221103162723_Adding Table for likes")]
+    partial class AddingTableforlikes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,32 +68,6 @@ namespace BoardEx.Web.Migrations
                     b.ToTable("BoardAds");
                 });
 
-            modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdComment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BoardAdId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BoardAdId");
-
-                    b.ToTable("BoardAdComment");
-                });
-
             modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdLike", b =>
                 {
                     b.Property<Guid>("Id")
@@ -131,15 +107,6 @@ namespace BoardEx.Web.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdComment", b =>
-                {
-                    b.HasOne("BoardEx.Web.Models.Domain.BoardAd", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("BoardAdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdLike", b =>
                 {
                     b.HasOne("BoardEx.Web.Models.Domain.BoardAd", null)
@@ -160,8 +127,6 @@ namespace BoardEx.Web.Migrations
 
             modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAd", b =>
                 {
-                    b.Navigation("Comments");
-
                     b.Navigation("Likes");
 
                     b.Navigation("Tags");

@@ -1,4 +1,5 @@
 using BoardEx.Web.Data;
+using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IBoardAdRepository, BoardAdRepository>();        // inject implementation of interface
 builder.Services.AddScoped<IImageRepository, ImageRepositoryCloudinary>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<IBoardAdLikeRepository, BoardAdLikeRepository>();
+builder.Services.AddScoped<IBoardAdCommentRepository, BoardAdCommentRepository>();
 
 var app = builder.Build();
 
