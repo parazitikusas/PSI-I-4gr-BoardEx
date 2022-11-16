@@ -12,7 +12,6 @@
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
         public bool IsSold { get; set; }
-
         public Guid UserId { get; set; }
 
 

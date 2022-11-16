@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -19,13 +20,15 @@ namespace BoardEx.Web.Pages.Admin.Posts
         private readonly UserManager<IdentityUser> userManager;
 
         [BindProperty]
-        public AddBoardAd AddBoardAdRequest { get; set; }
+        public AddBoardAd AddBoardAdRequest {get;set;}
 
         [BindProperty]
         public IFormFile FeaturedImage { get; set; }
 
-        [BindProperty]
-        public string Tags { get; set; }
+
+            [BindProperty]
+            public string Tags { get; set; }
+        
 
         public AddModel(IBoardAdRepository boardAdRepository, UserManager<IdentityUser> userManager)
         {
@@ -47,7 +50,11 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             var boardAd = new BoardAd(){ };
 
-            try { //exception catch doesnt work needs fix
+
+            try { //exception catch doesnt work needs fix               
+                if (Tags == null || AddBoardAdRequest.Name==null || AddBoardAdRequest.City == null || AddBoardAdRequest.Content == null || AddBoardAdRequest.Price == null || AddBoardAdRequest.FeaturedImageUrl == null)
+                    throw new ArgumentNullException();
+
                 boardAd = new BoardAd()
                 {
                     Name = AddBoardAdRequest.Name,
@@ -65,44 +72,14 @@ namespace BoardEx.Web.Pages.Admin.Posts
             }
             catch (Exception ex)
             {
-                var notf = new Notification
-                {
-                    Type = Enums.NotificationType.Error,
-                    Message = "Užpildykite visus laukelius!"
-                };
-
-                TempData["Notification"] = JsonSerializer.Serialize(notf);
-
-                var notificationJson = (string)TempData["Notification"];
-                if (notificationJson != null)
-                {
-                    ViewData["Notification"] = JsonSerializer.Deserialize<Notification>(notificationJson);
-                }
-
+                boardAd.logOutput("NullException, ID: ");
+                errorMessage("Užpildykite visus laukelius!");
                 return Page();
             }
-            
-
-
-
-
-
-
+        
             if (!nameFormatCheck(AddBoardAdRequest.Author))
             {
-                var notf = new Notification
-                {
-                    Type = Enums.NotificationType.Error,
-                    Message = "Blogas vardo formatas!"
-                };
-
-                TempData["Notification"] = JsonSerializer.Serialize(notf);
-
-                var notificationJson = (string)TempData["Notification"];
-                if (notificationJson != null)
-                {
-                    ViewData["Notification"] = JsonSerializer.Deserialize<Notification>(notificationJson);
-                }
+                errorMessage("Blogas vardo formatas!");
 
                 return Page();
             }
@@ -132,7 +109,11 @@ namespace BoardEx.Web.Pages.Admin.Posts
         }
 
         public bool nameFormatCheck (String name) { // tikrina skelbimo autoriaus vardo formata
-
+            if (name == null)
+            {
+                errorMessage("Užpildykite savo vardą");
+                return false;
+            }
             if (!Regex.Match(name, "^[A-Z][a-zA-Z]*\\s[A-Z][a-zA-Z]*$").Success)
             {
                 return false;
@@ -141,6 +122,27 @@ namespace BoardEx.Web.Pages.Admin.Posts
             {
                 return true;
             }
+        }
+
+
+
+        public void errorMessage(string messageText)
+        {
+            var notf = new Notification
+            {
+                Type = Enums.NotificationType.Error,
+                Message = messageText
+            };
+
+            TempData["Notification"] = JsonSerializer.Serialize(notf);
+
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<Notification>(notificationJson);
+            }
+
+
         }
 
         public string convert(String name) // konvertuoja zaidimo pavadinima i tinkama formata linkui

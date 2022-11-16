@@ -18,6 +18,8 @@ namespace BoardEx.Web.Pages.Admin
     [Authorize(Roles = "Admin")]
     public class LogsModel : PageModel
     {
+
+
         private IHostingEnvironment env;
         public void OnGet()
         {

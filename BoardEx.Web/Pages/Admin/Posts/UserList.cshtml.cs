@@ -44,13 +44,5 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 .Where(item => item.UserId == Guid.Parse(userId))
                 .ToList();
         }
-
-
-    //    public async Task<IEnumerable<BoardAd>> GetAllAsync(string tagName)
-    //    {
-    //        return await (boardExDbContext.BoardAds.Include(nameof(BoardAd.Tags))
-    //            .Where(x => x.Tags.Any(x => x.Name == tagName)))
-    //            .ToListAsync();
-    //    }
     }
 }
