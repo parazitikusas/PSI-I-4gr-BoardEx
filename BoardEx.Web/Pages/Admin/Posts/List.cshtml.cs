@@ -1,4 +1,4 @@
-using BoardEx.Web.Data;
+ï»¿using BoardEx.Web.Data;
 using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
@@ -28,7 +28,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
             LogsModel logsModel = new LogsModel();
 
 
-            logsModel.createLog(" Perþiûrëti visi skelbimai ");
+            logsModel.createLog("PerÅ¾iÅ«rÄ—ti visi skelbimai ");
 
 
             var notificationJson = (string)TempData["Notification"];

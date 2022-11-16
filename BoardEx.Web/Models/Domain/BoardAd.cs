@@ -12,9 +12,15 @@
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
         public bool IsSold { get; set; }
+        public Guid UserId { get; set; }
+
 
 
         // Navigation Property
         public ICollection<Tag> Tags { get; set; }
+        public ICollection<BoardAdLike> Likes { get; set; }
+        public ICollection<BoardAdComment> Comments { get; set; }
+
+
     }
 }

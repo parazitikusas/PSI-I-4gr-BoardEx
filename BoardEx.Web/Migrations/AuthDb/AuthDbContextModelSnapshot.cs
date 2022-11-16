@@ -166,15 +166,15 @@ namespace BoardEx.Web.Migrations.AuthDb
                         {
                             Id = "d0b88151-2770-46fe-8db5-cf1f1d98091c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7fdd2540-42ce-4698-a3e8-9b1f1908bae5",
+                            ConcurrencyStamp = "0c1d012c-b025-46c0-aa76-dd9e95f801fb",
                             Email = "superAdmin@superAdmin",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@SUPERADMIN",
                             NormalizedUserName = "SUPERADMIN@SUPERADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN5hDSgJIE5bHbaUmf6Zx3ut/rucdrrd9pxZXX4jfbZBPt1BP08L4WQVTDjR5FeBSg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAZ2pfuqpCnXyxO6MKgSugvfHdS9hU2kN5cQ7LFBdNw0wP0LsDNCqK4bvw7ZBe28kw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6584ae9c-b7f7-4ec7-bd6e-cc4ef4391f89",
+                            SecurityStamp = "8afc752f-a346-48cd-8426-c71efdb65817",
                             TwoFactorEnabled = false,
                             UserName = "superAdmin@superAdmin"
                         });

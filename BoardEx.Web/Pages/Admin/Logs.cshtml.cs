@@ -18,11 +18,9 @@ namespace BoardEx.Web.Pages.Admin
     [Authorize(Roles = "Admin")]
     public class LogsModel : PageModel
     {
+
+
         private IHostingEnvironment env;
-        public LogsModel()
-        {
-            //this.env = env;    
-        }
         public void OnGet()
         {
             //var webRoot = this.env.WebRootPath;

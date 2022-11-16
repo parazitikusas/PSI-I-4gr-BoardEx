@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "User")]
     public class EditModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;
@@ -33,7 +33,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public async Task OnGet(Guid Id)
         {
-            BoardAd = await boardAdRepository.GetAsync(Id);
+            Lazy<Task<BoardAd>> getAsync = new Lazy<Task<BoardAd>>(() => boardAdRepository.GetAsync(Id));  // LAZY IMPLEMENTATION
+
+            BoardAd = await getAsync.Value;
 
             if (BoardAd != null && BoardAd.Tags != null)
             {

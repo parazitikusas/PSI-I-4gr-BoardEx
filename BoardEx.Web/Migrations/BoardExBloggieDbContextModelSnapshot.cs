@@ -66,6 +66,51 @@ namespace BoardEx.Web.Migrations
                     b.ToTable("BoardAds");
                 });
 
+            modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdComment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BoardAdId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BoardAdId");
+
+                    b.ToTable("BoardAdComment");
+                });
+
+            modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BoardAdId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BoardAdId");
+
+                    b.ToTable("BoardAdLike");
+                });
+
             modelBuilder.Entity("BoardEx.Web.Models.Domain.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -86,6 +131,24 @@ namespace BoardEx.Web.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdComment", b =>
+                {
+                    b.HasOne("BoardEx.Web.Models.Domain.BoardAd", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("BoardAdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAdLike", b =>
+                {
+                    b.HasOne("BoardEx.Web.Models.Domain.BoardAd", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("BoardAdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("BoardEx.Web.Models.Domain.Tag", b =>
                 {
                     b.HasOne("BoardEx.Web.Models.Domain.BoardAd", null)
@@ -97,6 +160,10 @@ namespace BoardEx.Web.Migrations
 
             modelBuilder.Entity("BoardEx.Web.Models.Domain.BoardAd", b =>
                 {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Likes");
+
                     b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
