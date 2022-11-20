@@ -18,6 +18,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
     {
         private readonly IBoardAdRepository boardAdRepository;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ILogsRepository logsRepository;
 
         [BindProperty]
         public AddBoardAd AddBoardAdRequest {get;set;}
@@ -30,10 +31,13 @@ namespace BoardEx.Web.Pages.Admin.Posts
             public string Tags { get; set; }
         
 
-        public AddModel(IBoardAdRepository boardAdRepository, UserManager<IdentityUser> userManager)
+        public AddModel(IBoardAdRepository boardAdRepository,
+                        UserManager<IdentityUser> userManager,
+                        ILogsRepository logsRepository)
         {
             this.boardAdRepository = boardAdRepository;
             this.userManager = userManager;
+            this.logsRepository = logsRepository;
         }
 
         public void OnGet()
@@ -43,8 +47,6 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public async Task<IActionResult> OnPost()
         {
-
-            LogsModel logsModel = new LogsModel();
 
             var userId = userManager.GetUserId(User);
 
@@ -72,7 +74,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
             }
             catch (Exception ex)
             {
-                boardAd.logOutput("NullException, ID: ");
+                boardAd.logOutput(" NullException, ID: ");
                 errorMessage("Užpildykite visus laukelius!");
                 return Page();
             }
@@ -98,7 +100,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             //await boardAdRepository.UpdateAsync(boardAd);
 
-            //logsModel.createLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString()); // kvieciamas logsu sukurimo METODAS SU OPTIONAL parameter.
+            //logsRepository.CreateLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString()); // kvieciamas logsu sukurimo METODAS SU OPTIONAL parameter.
 
             //ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
 
