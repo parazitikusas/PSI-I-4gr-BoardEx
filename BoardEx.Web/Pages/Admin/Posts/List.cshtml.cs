@@ -14,21 +14,21 @@ namespace BoardEx.Web.Pages.Admin.Posts
     public class ListModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;
+        private readonly ILogsRepository logsRepository;
 
         public List<BoardAd> BoardAds { get; set; }
 
-        public ListModel(IBoardAdRepository boardAdRepository)
+        public ListModel(IBoardAdRepository boardAdRepository, ILogsRepository logsRepository)
         {
             this.boardAdRepository = boardAdRepository;
+            this.logsRepository = logsRepository;
         }
 
 
         public async Task OnGet()
         {
-            LogsModel logsModel = new LogsModel();
 
-
-            logsModel.createLog("Peržiūrėti visi skelbimai ");
+            logsRepository.CreateLog(" Peržiūrėti visi skelbimai");
 
 
             var notificationJson = (string)TempData["Notification"];
