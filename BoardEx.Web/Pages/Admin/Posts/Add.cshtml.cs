@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -27,7 +28,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
 
             [BindProperty]
-            public string Tags { get; set; }
+        public string Tags { get; set; }
         
 
         public AddModel(IBoardAdRepository boardAdRepository, UserManager<IdentityUser> userManager)
@@ -96,15 +97,8 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             TempData["Notification"] = JsonSerializer.Serialize(notification);
 
-            //await boardAdRepository.UpdateAsync(boardAd);
-
-            //logsModel.createLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString()); // kvieciamas logsu sukurimo METODAS SU OPTIONAL parameter.
-
-            //ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
-
             boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
 
-            //return RedirectToPage("/admin/posts/list"); changed
             return RedirectToPage("/admin/posts/userList");
         }
 
@@ -159,6 +153,12 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 {
                     List<char> list = new List<char>(charArr);
                     list.RemoveAt(charArr.Length - 1);
+                    charArr = list.ToArray();
+                }
+                while ((charArr[i] == ' ') && (charArr[i - 1] == '-'))
+                {
+                    List<char> list = new List<char>(charArr);
+                    list.RemoveAt(i);
                     charArr = list.ToArray();
                 }
                 if (charArr[i] == ' ')
