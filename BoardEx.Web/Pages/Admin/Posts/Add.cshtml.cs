@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
+    public delegate void LogDelegate(string message);
+
     [Authorize(Roles = "User")]
     public class AddModel : PageModel
     {
@@ -21,15 +23,15 @@ namespace BoardEx.Web.Pages.Admin.Posts
         private readonly ILogsRepository logsRepository;
 
         [BindProperty]
-        public AddBoardAd AddBoardAdRequest {get;set;}
+        public AddBoardAd AddBoardAdRequest { get; set; }
 
         [BindProperty]
         public IFormFile FeaturedImage { get; set; }
 
 
-            [BindProperty]
-            public string Tags { get; set; }
-        
+        [BindProperty]
+        public string Tags { get; set; }
+
 
         public AddModel(IBoardAdRepository boardAdRepository,
                         UserManager<IdentityUser> userManager,
@@ -50,11 +52,14 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             var userId = userManager.GetUserId(User);
 
-            var boardAd = new BoardAd(){ };
+            var boardAd = new BoardAd() { };
+
+            LogDelegate logDelegate = boardAd.logOutput;
 
 
-            try { //exception catch doesnt work needs fix               
-                if (Tags == null || AddBoardAdRequest.Name==null || AddBoardAdRequest.City == null || AddBoardAdRequest.Content == null || AddBoardAdRequest.Price == null || AddBoardAdRequest.FeaturedImageUrl == null)
+            try
+            { //exception catch doesnt work needs fix               
+                if (Tags == null || AddBoardAdRequest.Name == null || AddBoardAdRequest.City == null || AddBoardAdRequest.Content == null || AddBoardAdRequest.Price == null || AddBoardAdRequest.FeaturedImageUrl == null)
                     throw new ArgumentNullException();
 
                 boardAd = new BoardAd()
@@ -70,15 +75,20 @@ namespace BoardEx.Web.Pages.Admin.Posts
                     IsSold = AddBoardAdRequest.IsSold,
                     Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() { Name = x.Trim() })),
                     UserId = Guid.Parse(userId)
-                }; 
+                };
             }
             catch (Exception ex)
             {
-                boardAd.logOutput(" NullException, ID: ");
+
+                callLogs(" NullException, ID: ", logDelegate);
+
+                //boardAd.logOutput(" NullException, ID: ");
                 errorMessage("Užpildykite visus laukelius!");
                 return Page();
             }
-        
+
+
+
             if (!nameFormatCheck(AddBoardAdRequest.Author))
             {
                 errorMessage("Blogas vardo formatas!");
@@ -104,13 +114,21 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             //ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
 
-            boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
+            callLogs(" Sukurtas naujas skelbimas, ID: ", logDelegate);
+
+            //boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
 
             //return RedirectToPage("/admin/posts/list"); changed
             return RedirectToPage("/admin/posts/userList");
         }
 
-        public bool nameFormatCheck (String name) { // tikrina skelbimo autoriaus vardo formata
+        private void callLogs(string message, LogDelegate logDelegate)
+        {
+            logDelegate(message);
+        }
+
+        public bool nameFormatCheck(String name)
+        { // tikrina skelbimo autoriaus vardo formata
             if (name == null)
             {
                 errorMessage("Užpildykite savo vardą");
@@ -167,9 +185,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 {
                     charArr[i] = '-';
                 }
-                
+
             }
-            
+
             name = new string(charArr);
             return name;
         }
