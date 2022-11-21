@@ -40,6 +40,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 ViewData["Notification"] = JsonSerializer.Deserialize<Notification>(notificationJson);
             }
 
+
             BoardAds = (await boardAdRepository.GetAllAsync())?.ToList()
                 .Where(item => item.UserId == Guid.Parse(userId))
                 .ToList();
