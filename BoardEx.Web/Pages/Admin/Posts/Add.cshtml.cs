@@ -1,4 +1,4 @@
-﻿using BoardEx.Web.Data;
+using BoardEx.Web.Data;
 using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
@@ -14,27 +14,33 @@ using System.Text.RegularExpressions;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
+    public delegate void LogDelegate(string message);
+
     [Authorize(Roles = "User")]
     public class AddModel : PageModel
     {
         private readonly IBoardAdRepository boardAdRepository;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ILogsRepository logsRepository;
 
         [BindProperty]
-        public AddBoardAd AddBoardAdRequest {get;set;}
+        public AddBoardAd AddBoardAdRequest { get; set; }
 
         [BindProperty]
         public IFormFile FeaturedImage { get; set; }
 
 
-            [BindProperty]
-        public string Tags { get; set; }
-        
 
-        public AddModel(IBoardAdRepository boardAdRepository, UserManager<IdentityUser> userManager)
+        [BindProperty]
+        public string Tags { get; set; }
+
+        public AddModel(IBoardAdRepository boardAdRepository,
+                        UserManager<IdentityUser> userManager,
+                        ILogsRepository logsRepository)
         {
             this.boardAdRepository = boardAdRepository;
             this.userManager = userManager;
+            this.logsRepository = logsRepository;
         }
 
         public void OnGet()
@@ -45,15 +51,16 @@ namespace BoardEx.Web.Pages.Admin.Posts
         public async Task<IActionResult> OnPost()
         {
 
-            LogsModel logsModel = new LogsModel();
-
             var userId = userManager.GetUserId(User);
 
-            var boardAd = new BoardAd(){ };
+            var boardAd = new BoardAd() { };
+
+            LogDelegate logDelegate = boardAd.logOutput;
 
 
-            try { //exception catch doesnt work needs fix               
-                if (Tags == null || AddBoardAdRequest.Name==null || AddBoardAdRequest.City == null || AddBoardAdRequest.Content == null || AddBoardAdRequest.Price == null || AddBoardAdRequest.FeaturedImageUrl == null)
+            try
+            { //exception catch doesnt work needs fix               
+                if (Tags == null || AddBoardAdRequest.Name == null || AddBoardAdRequest.City == null || AddBoardAdRequest.Content == null || AddBoardAdRequest.Price == null || AddBoardAdRequest.FeaturedImageUrl == null)
                     throw new ArgumentNullException();
 
                 boardAd = new BoardAd()
@@ -69,15 +76,20 @@ namespace BoardEx.Web.Pages.Admin.Posts
                     IsSold = AddBoardAdRequest.IsSold,
                     Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() { Name = x.Trim() })),
                     UserId = Guid.Parse(userId)
-                }; 
+                };
             }
             catch (Exception ex)
             {
-                boardAd.logOutput("NullException, ID: ");
+
+                callLogs(" NullException, ID: ", logDelegate);
+
+                //boardAd.logOutput(" NullException, ID: ");
                 errorMessage("Užpildykite visus laukelius!");
                 return Page();
             }
-        
+
+
+
             if (!nameFormatCheck(AddBoardAdRequest.Author))
             {
                 errorMessage("Blogas vardo formatas!");
@@ -97,12 +109,27 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             TempData["Notification"] = JsonSerializer.Serialize(notification);
 
-            boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
+
+            //await boardAdRepository.UpdateAsync(boardAd);
+
+            //logsRepository.CreateLog(" Sukurtas naujas skelbimas ID: ", boardAd.Id.ToString()); // kvieciamas logsu sukurimo METODAS SU OPTIONAL parameter.
+
+            //ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
+
+            callLogs(" Sukurtas naujas skelbimas, ID: ", logDelegate);
+
+            //boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
 
             return RedirectToPage("/admin/posts/userList");
         }
 
-        public bool nameFormatCheck (String name) { // tikrina skelbimo autoriaus vardo formata
+        private void callLogs(string message, LogDelegate logDelegate)
+        {
+            logDelegate(message);
+        }
+
+        public bool nameFormatCheck(String name)
+        { // tikrina skelbimo autoriaus vardo formata
             if (name == null)
             {
                 errorMessage("Užpildykite savo vardą");
@@ -165,9 +192,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
                 {
                     charArr[i] = '-';
                 }
-                
+
             }
-            
+
             name = new string(charArr);
             return name;
         }

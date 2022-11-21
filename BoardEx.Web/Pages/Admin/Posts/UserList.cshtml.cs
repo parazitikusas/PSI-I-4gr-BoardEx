@@ -15,21 +15,21 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
         public List<BoardAd> BoardAds { get; set; }
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ILogsRepository logsRepository;
 
-
-
-        public UserListModel(IBoardAdRepository boardAdRepository, UserManager<IdentityUser> userManager)
+        public UserListModel(IBoardAdRepository boardAdRepository, 
+            UserManager<IdentityUser> userManager,
+            ILogsRepository logsRepository)
         {
             this.userManager = userManager;
+            this.logsRepository = logsRepository;
             this.boardAdRepository = boardAdRepository;
         }
 
         public async Task OnGet()
         {
-            LogsModel logsModel = new LogsModel();
 
-
-            logsModel.createLog("Peržiūrėti visi skelbimai ");
+            logsRepository.CreateLog(" Peržiūrėti visi skelbimai ");
 
             var userId = userManager.GetUserId(User);
 
