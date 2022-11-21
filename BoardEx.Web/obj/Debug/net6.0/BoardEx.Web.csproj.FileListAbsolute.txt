@@ -226,3 +226,8 @@ C:\Users\Arno\Desktop\explorer\Uni\2022 ruduo\PSI I\PSI-I-4gr-BoardEx\BoardEx.We
 C:\Users\Arno\Desktop\explorer\Uni\2022 ruduo\PSI I\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\BoardEx.Web.pdb
 C:\Users\Arno\Desktop\explorer\Uni\2022 ruduo\PSI I\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\BoardEx.Web.genruntimeconfig.cache
 C:\Users\Arno\Desktop\explorer\Uni\2022 ruduo\PSI I\PSI-I-4gr-BoardEx\BoardEx.Web\obj\Debug\net6.0\ref\BoardEx.Web.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Mantas\Documents\GitHub\PSI-I-4gr-BoardEx\BoardEx.Web\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll

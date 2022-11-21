@@ -4,6 +4,7 @@ namespace BoardEx.Web.Repositories
 {
     public interface IBoardAdRepository
     {
+        Task<IEnumerable<BoardAd>> GetCertainNumber(int number);
         Task<IEnumerable<BoardAd>> GetAllAsync();   //get all
         Task<IEnumerable<BoardAd>> GetAllAsync(string tagName);
         Task<BoardAd> GetAsync(Guid id);            // get one board ad

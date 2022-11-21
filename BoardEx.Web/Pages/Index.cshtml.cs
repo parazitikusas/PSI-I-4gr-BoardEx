@@ -1,5 +1,6 @@
 ﻿using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Repositories;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,6 +16,15 @@ namespace BoardEx.Web.Pages
         public List<BoardAd> Boards { get; set; }
         public List<Tag> Tags { get; set; }
 
+        /*Button button = new Button();
+        button.Click += (s, e) => {
+            //your code;
+        };
+        //button.Click += new EventHandler(button_Click);
+        container.Controls.Add(button);*/
+
+        int x = 2;
+
         public IndexModel(ILogger<IndexModel> logger, 
             IBoardAdRepository boardAdRepository,
             ITagRepository tagRepository)
@@ -26,10 +36,34 @@ namespace BoardEx.Web.Pages
 
         public async Task<IActionResult> OnGet()
         {
-            Boards = (await boardAdRepository.GetAllAsync()).ToList();
-            Tags = (await tagRepository.GetAllAsync()).ToList();
+
+            Boards = (await boardAdRepository.GetCertainNumber(x)).ToList();
+            Tags = (await tagRepository.GetGetCertainNumber(x)).ToList();
+
+            //Boards = (await boardAdRepository.GetAllAsync()).ToList();
+            //Tags = (await tagRepository.GetAllAsync()).ToList();
 
             return Page();
         }
+
+        public async Task<IActionResult> UpdateList()
+        {
+            Console.Write("test");
+            x += 2;
+            Boards = (await boardAdRepository.GetCertainNumber(x)).ToList();
+            Tags = (await tagRepository.GetGetCertainNumber(x)).ToList();
+
+            return Page();
+        }
+
+        public string Message { get; set; }
+        public void OnGetOnClick()
+        {
+
+            Message = "Hello";
+
+        }
+
     }
+    
 }

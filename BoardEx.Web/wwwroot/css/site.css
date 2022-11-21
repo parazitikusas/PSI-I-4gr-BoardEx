@@ -62,3 +62,16 @@ body {
     background: url("https://images.pexels.com/photos/776654/pexels-photo-776654.jpeg?cs=srgb&dl=pexels-ylanite-koppens-776654.jpg&fm=jpg");
 }
 
+.card {
+    width: 400px;
+    height: 450px;
+}
+
+.card-body {
+    height: 150px;
+}
+
+.card-image {
+    width: 400px;
+    height: 250px;
+}

@@ -19,5 +19,12 @@ namespace BoardEx.Web.Repositories
 
             return tags.DistinctBy(x => x.Name.ToLower());
         }
+
+        public async Task<IEnumerable<Tag>> GetGetCertainNumber(int number)
+        {
+            var tags = await boardExDbContext.Tags.Take(number).ToListAsync();
+
+            return tags.DistinctBy(x => x.Name.ToLower());
+        }
     }
 }

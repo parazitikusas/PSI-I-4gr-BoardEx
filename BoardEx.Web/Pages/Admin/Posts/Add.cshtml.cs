@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 
 namespace BoardEx.Web.Pages.Admin.Posts
 {
+    public delegate void LogDelegate(string message);
+
     [Authorize(Roles = "User")]
     public class AddModel : PageModel
     {
@@ -52,8 +54,11 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             var boardAd = new BoardAd(){ };
 
+            LogDelegate logDelegate = boardAd.logOutput;
 
-            try { //exception catch doesnt work needs fix               
+
+            try
+            { //exception catch doesnt work needs fix               
                 if (Tags == null || AddBoardAdRequest.Name==null || AddBoardAdRequest.City == null || AddBoardAdRequest.Content == null || AddBoardAdRequest.Price == null || AddBoardAdRequest.FeaturedImageUrl == null)
                     throw new ArgumentNullException();
 
@@ -74,10 +79,15 @@ namespace BoardEx.Web.Pages.Admin.Posts
             }
             catch (Exception ex)
             {
-                boardAd.logOutput(" NullException, ID: ");
+                
+                callLogs(" NullException, ID: ", logDelegate);
+
+                //boardAd.logOutput(" NullException, ID: ");
                 errorMessage("Užpildykite visus laukelius!");
                 return Page();
             }
+
+
         
             if (!nameFormatCheck(AddBoardAdRequest.Author))
             {
@@ -104,10 +114,17 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
             //ExtentionMethods.logOutput(boardAd, " Sukurtas naujas skelbimas, ID: "); // kvieciamas logsu sukurimo EXTENDED METODAS
 
-            boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
+            callLogs(" Sukurtas naujas skelbimas, ID: ", logDelegate);
+
+            //boardAd.logOutput(" Sukurtas naujas skelbimas, ID: ");
 
             //return RedirectToPage("/admin/posts/list"); changed
             return RedirectToPage("/admin/posts/userList");
+        }
+
+        private void callLogs(string message, LogDelegate logDelegate)
+        {
+            logDelegate(message);
         }
 
         public bool nameFormatCheck (String name) { // tikrina skelbimo autoriaus vardo formata

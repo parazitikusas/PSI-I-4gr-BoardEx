@@ -13,6 +13,11 @@ namespace BoardEx.Web.Repositories
             this.boardExDbContext = boardExDbContext;
         }
 
+        public async Task<IEnumerable<BoardAd>> GetCertainNumber(int number)
+        {
+            return await boardExDbContext.BoardAds.Take(number).ToListAsync();
+        }
+
         public async Task<BoardAd> AddAsync(BoardAd boardAd)
         {
             await boardExDbContext.BoardAds.AddAsync(boardAd);

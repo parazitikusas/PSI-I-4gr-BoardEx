@@ -1,8 +1,11 @@
 ﻿@page
+@using BoardEx.Web.Pages.Shared
+@using BoardEx.Web.Pages
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
+
 
 <div class="container jumbotron col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-5 py-5">
@@ -47,20 +50,36 @@
                 {
                     
                     <div class="card card-border-css mb-5 bg-light box-shadow">
-                        <img src="@boardAd.FeaturedImageUrl" alt="@boardAd.Name" class="mb-2 d-block img-fluid" />
+                        <div>
+                            <img class="card-image" src="@boardAd.FeaturedImageUrl" alt="@boardAd.Name" class="mb-2 d-block img-fluid" />
+                        </div>
                         <div class="card-body card-header-color px-4 py-4">
                             <h2 class="mb-2">@boardAd.Name</h2>
-                            <p>
+                            <p style="margin-bottom: 0px;">
                                 Autorius: @boardAd.Author
                                 <br />
                                 Skelbimas įkeltas: @boardAd.PublishedDate.ToShortDateString()
                             </p>
-                            <p class="mb-2">@Html.Raw(boardAd.Content)</p>
+                            <p class="mb-2" style="margin-bottom: 0px;">@Html.Raw(boardAd.Content)</p>
                             <a href="/skelbimai/@boardAd.UrlHandler" class="btn btn-dark">Žiūrėti daugiau</a>
                         </div>
                     </div>
                 }
+
+                <a asp-page="Index" asp-page-handler="OnClick">
+                    Click Me
+                </a>
+
+                <div>
+                    @Model.Message
+                </div>
             }
         </div>
     </div>
 </div>
+
+
+
+@section Scripts{
+    
+}
