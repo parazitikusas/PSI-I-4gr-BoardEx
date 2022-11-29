@@ -7939,19 +7939,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Arno\\.nuget\\packages\\": {}
+    "C:\\Users\\Mantas\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\xUnitTests\\xUnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\xUnitTests\\xUnitTests.csproj",
       "projectName": "xUnitTests",
-      "projectPath": "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\xUnitTests\\xUnitTests.csproj",
-      "packagesPath": "C:\\Users\\Arno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\xUnitTests\\obj\\",
+      "projectPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\xUnitTests\\xUnitTests.csproj",
+      "packagesPath": "C:\\Users\\Mantas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\xUnitTests\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Arno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mantas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7959,14 +7964,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj": {
-              "projectPath": "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj"
+            "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj": {
+              "projectPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj"
             }
           }
         }

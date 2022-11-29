@@ -1,4 +1,5 @@
 ﻿using BoardEx.Web.Data;
+using BoardEx.Web.Event;
 using BoardEx.Web.Models.Domain;
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
@@ -15,6 +16,9 @@ namespace BoardEx.Web.Pages.Admin.Posts
     {
         private readonly IBoardAdRepository boardAdRepository;
         private readonly ILogsRepository logsRepository;
+        public static event LogAddDelegate logEventHandler;
+        public static LogListener logListener = null;
+        public static Log log;
 
         public List<BoardAd> BoardAds { get; set; }
 
@@ -28,7 +32,10 @@ namespace BoardEx.Web.Pages.Admin.Posts
         public async Task OnGet()
         {
 
-            logsRepository.CreateLog(" Peržiūrėti visi skelbimai");
+            //logsRepository.CreateLog(" Peržiūrėti visi skelbimai");
+            logEventHandler += new LogAddDelegate(logListener.AddLog);
+            log = new Log { Message = " Peržiūrėti visi skelbimai" };
+            AddNewLog(log);
 
 
             var notificationJson = (string)TempData["Notification"];
@@ -38,6 +45,23 @@ namespace BoardEx.Web.Pages.Admin.Posts
             }
 
             BoardAds = (await boardAdRepository.GetAllAsync())?.ToList();
+        }
+
+        private static void AddNewLog(Log log)
+        {
+            if(log != null)
+            {
+                LogArgs l = new LogArgs(log);
+                OnLogAdd(l);
+            }
+        }
+
+        private static void OnLogAdd(LogArgs l)
+        {
+            if(logEventHandler != null)
+            {
+                logEventHandler(l);
+            }
         }
     }
 }

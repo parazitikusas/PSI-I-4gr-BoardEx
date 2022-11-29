@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj": {}
+    "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj": {
+    "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
+        "projectUniqueName": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
         "projectName": "BoardEx.Web",
-        "projectPath": "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
-        "packagesPath": "C:\\Users\\Arno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arno\\Desktop\\explorer\\Uni\\2022 ruduo\\PSI I\\PSI-I-4gr-BoardEx\\BoardEx.Web\\obj\\",
+        "projectPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\BoardEx.Web.csproj",
+        "packagesPath": "C:\\Users\\Mantas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mantas\\Documents\\GitHub\\PSI-I-4gr-BoardEx\\BoardEx.Web\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Arno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mantas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
