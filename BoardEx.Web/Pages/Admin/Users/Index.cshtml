@@ -1,0 +1,37 @@
+﻿@page
+@model BoardEx.Web.Pages.Admin.Users.IndexModel
+@{
+}
+
+
+<div class="bg-secondary bg-opacity-10 py-2 mb-5">
+	<div class="container">
+		<h1>Vartotojai</h1>
+	</div>
+</div>
+
+<div>
+	<div class="container">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Username</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var user in Model.Users)
+				{
+					<tr>
+						<td>@user.Id</td>
+						<td>@user.Username</td>
+						<td>@user.Email</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+
+	</div>
+</div>

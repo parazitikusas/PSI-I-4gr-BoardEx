@@ -45,6 +45,7 @@ builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IBoardAdLikeRepository, BoardAdLikeRepository>();
 builder.Services.AddScoped<IBoardAdCommentRepository, BoardAdCommentRepository>();
 builder.Services.AddScoped<ILogsRepository, LogsRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
