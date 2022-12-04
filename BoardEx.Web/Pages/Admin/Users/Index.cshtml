@@ -21,26 +21,35 @@
 
 		</div>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Username</th>
-					<th>Email</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var user in Model.Users)
-				{
+		<form method="post" asp-page-handler="delete" id="deleteUserForm">
+			<table class="table">
+				<thead>
 					<tr>
-						<td>@user.Id</td>
-						<td>@user.Username</td>
-						<td>@user.Email</td>
+						<th>Id</th>
+						<th>Username</th>
+						<th>Email</th>
+						<th> </th>
 					</tr>
-				}
-			</tbody>
-		</table>
-
+				</thead>
+				<tbody>
+					@foreach (var user in Model.Users)
+					{
+						<tr>
+							<td>@user.Id</td>
+							<td>@user.Username</td>
+							<td>@user.Email</td>
+							<td>
+								<a class="btn btn-danger user-delete-btn"
+							   data-id="@user.Id">
+									Ištrinti
+								</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<input type="hidden" asp-for="SelectedUserid" id="selectedUserId"/>
+		</form>
 	</div>
 </div>
 
@@ -73,12 +82,15 @@
 								Vartotojas
 							</label>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="Admin" asp-for="AddUserRequest.AdminCheckbox">
-							<label class="form-check-label" for="flexCheckChecked">
-								Admin
-							</label>
-						</div>
+						@if (User.IsInRole("SuperAdmin"))
+						{
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="Admin" asp-for="AddUserRequest.AdminCheckbox">
+								<label class="form-check-label" for="flexCheckChecked">
+									Admin
+								</label>
+							</div>
+						}
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -89,3 +101,22 @@
 		</div>
 	</div>
 </form>
+
+@section Scripts {
+	<script>
+		const userDeleteElements = document.querySelectorAll('.user-delete-btn');
+		const selectedUserIdElement = document.getElementById('selectedUserId');
+		const deleteUserFormElement = document.getElementById('deleteUserForm');
+
+		userDeleteElements.forEach((element) => {
+
+			element.addEventListener('click', function () {
+				
+				const userId = element.dataset.id;
+
+				selectedUserIdElement.value = userId;
+				deleteUserFormElement.submit();
+			})
+		})
+	</script>
+}

@@ -1,11 +1,13 @@
 using BoardEx.Web.Models.ViewModels;
 using BoardEx.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BoardEx.Web.Pages.Admin.Users
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly IUserRepository userRepository;
@@ -14,6 +16,9 @@ namespace BoardEx.Web.Pages.Admin.Users
 
         [BindProperty]
         public AddUser AddUserRequest { get; set; }
+
+        [BindProperty]
+        public Guid SelectedUserid { get; set; }
 
         public IndexModel(IUserRepository userRepository)
         {
@@ -60,6 +65,12 @@ namespace BoardEx.Web.Pages.Admin.Users
                 return RedirectToPage("/Admin/Users/Index");
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostDelete()
+        {
+            await userRepository.Delete(SelectedUserid);
+            return RedirectToPage("/Admin/Users/Index");
         }
     }
 }

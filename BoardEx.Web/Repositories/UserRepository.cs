@@ -32,6 +32,16 @@ namespace BoardEx.Web.Repositories
             return false;
         }
 
+        public async Task Delete(Guid userId)
+        {
+            var user = await userManager.FindByIdAsync(userId.ToString());
+
+            if (user != null)
+            {
+                await userManager.DeleteAsync(user);
+            }
+        }
+
         public async Task<IEnumerable<IdentityUser>> GetAll()
         {
             var users = await authDbContext.Users.ToListAsync();
