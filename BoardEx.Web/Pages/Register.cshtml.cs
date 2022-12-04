@@ -23,36 +23,45 @@ namespace BoardEx.Web.Pages
 
         public async Task<IActionResult> OnPost()
         {
-            var user = new IdentityUser
-            {
-                UserName = RegisterViewModel.Username,
-                Email = RegisterViewModel.Email,
-            };
 
-            var identityResult = await userManager.CreateAsync(user, RegisterViewModel.Password);
-            
-            if (identityResult.Succeeded)
+            if (ModelState.IsValid)
             {
-                var addRolesResult = await userManager.AddToRoleAsync(user, "User");
-
-                if (addRolesResult.Succeeded)
+                var user = new IdentityUser
                 {
-                    ViewData["Notification"] = new Notification
+                    UserName = RegisterViewModel.Username,
+                    Email = RegisterViewModel.Email,
+                };
+
+                var identityResult = await userManager.CreateAsync(user, RegisterViewModel.Password);
+
+                if (identityResult.Succeeded)
+                {
+                    var addRolesResult = await userManager.AddToRoleAsync(user, "User");
+
+                    if (addRolesResult.Succeeded)
                     {
-                        Type = Enums.NotificationType.Success,
-                        Message = "Vartotojas sėkmingai sukurtas!"
-                    };
+                        ViewData["Notification"] = new Notification
+                        {
+                            Type = Enums.NotificationType.Success,
+                            Message = "Vartotojas sėkmingai sukurtas!"
+                        };
+                    }
+                    return Page();
                 }
+
+                ViewData["Notification"] = new Notification
+                {
+                    Type = Enums.NotificationType.Error,
+                    Message = "Vartotojas nesukurtas!"
+                };
+
                 return Page();
             }
-
-            ViewData["Notification"] = new Notification
+            else
             {
-                Type = Enums.NotificationType.Error,
-                Message = "Vartotojas nesukurtas!"
-            };
-
-            return Page();
+                return Page();
+            }
+            
         }
     }
 }
