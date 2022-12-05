@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -32,6 +33,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
 
 
         [BindProperty]
+        [Required]
         public string Tags { get; set; }
 
         public AddModel(IBoardAdRepository boardAdRepository,

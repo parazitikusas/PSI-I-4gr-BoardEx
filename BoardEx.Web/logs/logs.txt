@@ -98,3 +98,6 @@
 <br/>11/16/2022 4:25:37 PMPeržiūrėti visi skelbimai 
 <br/>11/16/2022 4:27:06 PMPeržiūrėti visi skelbimai 
 <br/>11/16/2022 4:42:52 PMNullException, ID: 00000000-0000-0000-0000-000000000000
+<br/>12/5/2022 2:46:05 PM NullException, ID: 00000000-0000-0000-0000-000000000000
+<br/>12/5/2022 7:14:41 PM Peržiūrėti visi skelbimai 
+<br/>12/5/2022 7:14:45 PM Atnaujintas skelbimas ID: c776e5d9-b18f-4ba8-3424-08dac67e1738

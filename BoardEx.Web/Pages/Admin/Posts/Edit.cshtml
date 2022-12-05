@@ -12,106 +12,116 @@
 
 <partial name="_Notification">
 
-@if (Model.BoardAd != null)
-{
-	<div>
-		<div class="container">
-			<form method="post">
-				<div class="mb-3">
-					<label for="id" class="form-label">Id</label>
-					<input type="text" class="form-control" id="id" asp-for="BoardAd.Id" readonly>
-				</div>
+	@if (Model.BoardAd != null)
+	{
+		<div>
+			<div class="container">
+				<form method="post">
+					<div class="mb-3">
+						<label for="id" class="form-label">Id</label>
+						<input type="text" class="form-control" id="id" asp-for="BoardAd.Id" readonly required>
+						<span class="text-danger" asp-validation-for="BoardAd.Id"></span>
+					</div>
 
-				<div class="mb-3">
-					<label for="name" class="form-label">Pavadinimas</label>
-					<input type="text" class="form-control" id="name" asp-for="BoardAd.Name">
-				</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Pavadinimas</label>
+						<input type="text" class="form-control" id="name" asp-for="BoardAd.Name" required>
+						<span class="text-danger" asp-validation-for="BoardAd.Name"></span>
+					</div>
 
-				<div class="mb-3">
-					<label for="city" class="form-label">Miestas</label>
-					<input type="text" class="form-control" id="city" asp-for="BoardAd.City">
-				</div>
+					<div class="mb-3">
+						<label for="city" class="form-label">Miestas</label>
+						<input type="text" class="form-control" id="city" asp-for="BoardAd.City" required>
+						<span class="text-danger" asp-validation-for="BoardAd.City"></span>
+					</div>
 
-				<div class="mb-3">
-					<label for="content" class="form-label">Aprašymas</label>
-					<textarea class="form-control" id="content" asp-for="BoardAd.Content"></textarea>
-				</div>
+					<div class="mb-3">
+						<label for="content" class="form-label">Aprašymas</label>
+						<textarea class="form-control" id="content" asp-for="BoardAd.Content" required></textarea>
+						<span class="text-danger" asp-validation-for="BoardAd.Content"></span>
+					</div>
 
-				<div class="mb-3">
-					<label for="price" class="form-label">Kaina</label>
-					<input type="number" class="form-control" id="price" asp-for="BoardAd.Price">
-				</div>
+					<div class="mb-3">
+						<label for="price" class="form-label">Kaina</label>
+						<input type="number" class="form-control" id="price" asp-for="BoardAd.Price" required>
+						<span class="text-danger" asp-validation-for="BoardAd.Price"></span>
+					</div>
 
-				<div class="mb-3">
-					<label for="name" class="form-label">URL handler</label>
-					<input type="text" class="form-control" id="name" asp-for="BoardAd.UrlHandler" readonly>
-				</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">URL handler</label>
+						<input type="text" class="form-control" id="name" asp-for="BoardAd.UrlHandler" readonly required>
+						<span class="text-danger" asp-validation-for="BoardAd.UrlHandler"></span>
+					</div>
 
 
 
-				<div class="mb-3">
-					<label for="featuredImageUpload" class="form-label">Įkelti nuotrauką </label>
-					<input type="file" id="featuredImageUpload" asp-for="FeaturedImage" />
+					<div class="mb-3">
+						<label for="featuredImageUpload" class="form-label">Įkelti nuotrauką </label>
+						<input type="file" id="featuredImageUpload" asp-for="FeaturedImage" />
 
-					@if (Model.BoardAd.FeaturedImageUrl != null)
-					{
+						@if (Model.BoardAd.FeaturedImageUrl != null)
+						{
 							<img src="@Model.BoardAd.FeaturedImageUrl" id="featuredImageDisplay" style="width:100px" />
-					}
-					else
-					{
-						<img src="" id="featuredImageDisplay" style="display:none; width:100px" />
-					}
-				</div>
+						}
+						else
+						{
+							<img src="" id="featuredImageDisplay" style="display:none; width:100px" />
+						}
+					</div>
 
-				<div class="mb-3">
-					<label for="featuredImageUrl" class="form-label">Nuotraukos nuoroda</label>
-					<input type="text" class="form-control" id="featuredImageUrl" asp-for="BoardAd.FeaturedImageUrl">
-				</div>
+					<div class="mb-3">
+						<label for="featuredImageUrl" class="form-label">Nuotraukos nuoroda</label>
+						<input type="text" class="form-control" id="featuredImageUrl" asp-for="BoardAd.FeaturedImageUrl" required>
+						<span class="text-danger" asp-validation-for="BoardAd.FeaturedImageUrl"></span>
+					</div>
 
-				<div class="mb-3">
-					<label for="publishedDate" class="form-label">Skelbimo įdėjimo data</label>
-					<input type="date" class="form-control" id="publishedDate" asp-for="BoardAd.PublishedDate" readonly>
-				</div>
+					<div class="mb-3">
+						<label for="publishedDate" class="form-label">Skelbimo įdėjimo data</label>
+						<input type="date" class="form-control" id="publishedDate" asp-for="BoardAd.PublishedDate" readonly required>
+						<span class="text-danger" asp-validation-for="BoardAd.PublishedDate"></span>
+					</div>
 
-				<div class="mb-3">
-					<label for="author" class="form-label">Autorius</label>
-					<input type="text" class="form-control" id="author" asp-for="BoardAd.Author">
-				</div>
-				
-				<div class="mb-3">
-					<label for="tags" class="form-label">Kategorijos (atskirti kablelias)</label>
-					<input type="text" id="tags" class="form-control" asp-for="Tags">
-				</div>
+					<div class="mb-3">
+						<label for="author" class="form-label">Autorius</label>
+						<input type="text" class="form-control" id="author" asp-for="BoardAd.Author" required>
+						<span class="text-danger" asp-validation-for="BoardAd.Author"></span>
+					</div>
 
-				<div class="form-check mb-3">
-					<input class="form-check-input" type="checkbox" id="isSold" asp-for="BoardAd.IsSold" />
-					<label for="isSold" class="form-check-label">
-						Parduota
-					</label>
-				</div>
+					<div class="mb-3">
+						<label for="tags" class="form-label">Kategorijos (atskirti kablelias)</label>
+						<input type="text" id="tags" class="form-control" asp-for="Tags" required>
+						<span class="text-danger" asp-validation-for="Tags"></span>
+					</div>
+
+					<div class="form-check mb-3">
+						<input class="form-check-input" type="checkbox" id="isSold" asp-for="BoardAd.IsSold" />
+						<label for="isSold" class="form-check-label">
+							Parduota
+						</label>
+					</div>
 
 					<div class="mb-3">
 						<label for="id" class="form-label">Id</label>
 						<input type="text" class="form-control" id="id" asp-for="BoardAd.UserId" readonly>
 					</div>
 
-				<div class="mb-3 d-flex justify-content-between">
-					<button class="btn btn-primary" type="submit" asp-page-handler="Edit">Atnaujinti</button>
+					<div class="mb-3 d-flex justify-content-between">
+						<button class="btn btn-primary" type="submit" asp-page-handler="Edit">Atnaujinti</button>
 
-					<button class="btn btn-danger" type="submit" asp-page-handler="Delete">Ištrinti</button>
-				</div>
-			</form>
+						<button class="btn btn-danger" type="submit" asp-page-handler="Delete">Ištrinti</button>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
-}
-else
-{
-	<div class="container">
-		<p>Board Ad Not Found!</p>
-	</div>
-}
+	}
+	else
+	{
+		<div class="container">
+			<p>Board Ad Not Found!</p>
+		</div>
+	}
 
-@section Scripts {
+	@section Scripts {
 		<script>
 			var editor = new FroalaEditor('#content', {
 				imageUploadURL: '/api/images'
@@ -144,4 +154,4 @@ else
 
 			featuredImageUploadElement.addEventListener('change', uploadFeaturedImage);
 		</script>
-}
+	}
