@@ -4,6 +4,7 @@ using BoardEx.Web.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace BoardEx.Web.Pages.Board
 {
@@ -25,6 +26,9 @@ namespace BoardEx.Web.Pages.Board
         public Guid BoardAdId { get; set; }
         
         [BindProperty]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(200)]
         public string CommentDescription { get; set; }
 
         public DetailsModel(IBoardAdRepository boardAdRepository, 
@@ -42,49 +46,37 @@ namespace BoardEx.Web.Pages.Board
 
         public async Task<IActionResult> OnGet(string urlHandle)
         {
-            BoardAd = await boardAdRepository.GetAsync(urlHandle);
-
-            if (BoardAd != null)
-            {
-                BoardAdId = BoardAd.Id;
-
-                if (signInManager.IsSignedIn(User))
-                {
-                    var likes = await boardAdLikeRepository.GetLikesForBoard(BoardAd.Id);
-
-                    var userId = userManager.GetUserId(User);
-
-                    Liked = likes.Any(x => x.UserId == Guid.Parse(userId));
-
-                    await GetComments();
-                }
-                
-
-                TotalLikes = await boardAdLikeRepository.GetTotalLikesForBoardAd(BoardAd.Id);
-            }
+            await GetBoard(urlHandle);
+            
             return Page();
             
         }
 
         public async Task<IActionResult> OnPost(string urlHandle)
         {
-            if (signInManager.IsSignedIn(User) && !string.IsNullOrEmpty(CommentDescription))
+            if (ModelState.IsValid)
             {
-                var userId = userManager.GetUserId(User);
-
-                var comment = new BoardAdComment()
+                if (signInManager.IsSignedIn(User) && !string.IsNullOrEmpty(CommentDescription))
                 {
-                    BoardAdId = BoardAdId,
-                    Description = CommentDescription,
-                    DateAdded = DateTime.Now,
-                    UserId = Guid.Parse(userId)
-                };
+                    var userId = userManager.GetUserId(User);
 
-                await boardAdCommentRepository.AddAsync(comment);
+                    var comment = new BoardAdComment()
+                    {
+                        BoardAdId = BoardAdId,
+                        Description = CommentDescription,
+                        DateAdded = DateTime.Now,
+                        UserId = Guid.Parse(userId)
+                    };
+
+                    await boardAdCommentRepository.AddAsync(comment);
+                }
+
+
+                return RedirectToPage("/skelbimai/details", new { urlHandle = urlHandle });
             }
 
-
-            return RedirectToPage("/skelbimai/details", new { urlHandle  = urlHandle});
+            await GetBoard(urlHandle);
+            return Page();
         }
 
         private async Task GetComments()
@@ -104,6 +96,29 @@ namespace BoardEx.Web.Pages.Board
             }
 
             Comments = boardAdCommentsViewModel;
+        }
+
+        private async Task GetBoard(string urlHandle)
+        {
+            BoardAd = await boardAdRepository.GetAsync(urlHandle);
+
+            if (BoardAd != null)
+            {
+                BoardAdId = BoardAd.Id;
+
+                if (signInManager.IsSignedIn(User))
+                {
+                    var likes = await boardAdLikeRepository.GetLikesForBoard(BoardAd.Id);
+
+                    var userId = userManager.GetUserId(User);
+
+                    Liked = likes.Any(x => x.UserId == Guid.Parse(userId));
+
+                    await GetComments();
+                }
+
+                TotalLikes = await boardAdLikeRepository.GetTotalLikesForBoardAd(BoardAd.Id);
+            }
         }
     }
 }

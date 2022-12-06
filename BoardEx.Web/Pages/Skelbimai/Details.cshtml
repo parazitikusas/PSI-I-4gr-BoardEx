@@ -73,6 +73,7 @@
 								<div class="mb-3">
 									<label class="form-label">Komentaras</label>
 									<input type="text" class="form-control" asp-for="CommentDescription"/>
+									<span class="text-danger" asp-validation-for="CommentDescription"></span>
 								</div>
 								<div class="mb-3">
 									<button type="submit" class="btn btn-dark">Pridėti komentarą</button>
@@ -154,7 +155,10 @@
 }
 else
 {
-	<h2>Atspirašau.... toks skelbimas neegzistuoja!</h2>
+	<div class="container mt-3">
+		<h2>Atspirašau.... toks skelbimas neegzistuoja!</h2>
+	</div>
+	
 }
 
 
