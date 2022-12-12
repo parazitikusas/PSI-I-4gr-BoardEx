@@ -18,7 +18,7 @@ namespace BoardEx.Web.Pages.Admin.Posts
         private readonly ILogsRepository logsRepository;
 
         [BindProperty]
-        public BoardAd BoardAd { get; set; }
+        public EditBoardAdRequest BoardAd { get; set; }
 
         [BindProperty]
         public IFormFile FeaturedImage { get; set; }
@@ -37,47 +37,82 @@ namespace BoardEx.Web.Pages.Admin.Posts
         {
             Lazy<Task<BoardAd>> getAsync = new Lazy<Task<BoardAd>>(() => boardAdRepository.GetAsync(Id));  // LAZY IMPLEMENTATION
 
-            BoardAd = await getAsync.Value;
+            var boardAdDomainModel = await getAsync.Value;
 
-            if (BoardAd != null && BoardAd.Tags != null)
+            if (boardAdDomainModel != null && boardAdDomainModel.Tags != null)
             {
-                Tags = String.Join(',', BoardAd.Tags.Select(x => x.Name));
+                BoardAd = new EditBoardAdRequest
+                {
+                    Id = boardAdDomainModel.Id,
+                    Name = boardAdDomainModel.Name,
+                    City = boardAdDomainModel.City,
+                    Content = boardAdDomainModel.Content,
+                    UrlHandler = boardAdDomainModel.UrlHandler,
+                    Price = boardAdDomainModel.Price,
+                    FeaturedImageUrl = boardAdDomainModel.FeaturedImageUrl,
+                    PublishedDate = boardAdDomainModel.PublishedDate,
+                    Author = boardAdDomainModel.Author,
+                    IsSold = boardAdDomainModel.IsSold,
+                    UserId = boardAdDomainModel.UserId
+                };
+
+                Tags = String.Join(',', boardAdDomainModel.Tags.Select(x => x.Name));
             }
+
         }
 
         public async Task<IActionResult> OnPostEdit()               // reikėtų padaryti, kad po sėkimingo atnaujinimo, redirectintu į listą ir ten rašytu notificationa.
         {
-
-            try
+            if (ModelState.IsValid)
             {
-                BoardAd.Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() { Name = x.Trim() }));
-
-                await boardAdRepository.UpdateAsync(BoardAd);
-
-                logsRepository.CreateLog(" Atnaujintas skelbimas ID: ", BoardAd.Id.ToString());
-
-                ViewData["Notification"] = new Notification
+                try
                 {
-                    Message = "Sėkmingai atnaujinta!",
-                    Type = Enums.NotificationType.Success
-                };
-            }
-            catch (Exception ex)
-            {
+                    var boardAdDomainModel = new BoardAd
+                    {
+                        Id = BoardAd.Id,
+                        Name = BoardAd.Name,
+                        City = BoardAd.City,
+                        Content = BoardAd.Content,
+                        UrlHandler = BoardAd.UrlHandler,
+                        Price = BoardAd.Price,
+                        FeaturedImageUrl = BoardAd.FeaturedImageUrl,
+                        PublishedDate = BoardAd.PublishedDate,
+                        Author = BoardAd.Author,
+                        IsSold = BoardAd.IsSold,
+                        UserId = BoardAd.UserId,
+                        Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag() { Name = x.Trim() }))
+                    };
 
-                logsRepository.CreateLog(" Nepavyko atnaujinti skelbimo ID: ", BoardAd.Id.ToString());
+                    await boardAdRepository.UpdateAsync(boardAdDomainModel);
 
+                    logsRepository.CreateLog(" Atnaujintas skelbimas ID: ", BoardAd.Id.ToString());
 
-                ViewData["Notification"] = new Notification
+                    ViewData["Notification"] = new Notification
+                    {
+                        Message = "Sėkmingai atnaujinta!",
+                        Type = Enums.NotificationType.Success
+                    };
+                }
+                catch (Exception ex)
                 {
-                    Message = "Ooops! Kažkas negerai!",
-                    Type = Enums.NotificationType.Error
-                };
 
-                
+                    logsRepository.CreateLog(" Nepavyko atnaujinti skelbimo ID: ", BoardAd.Id.ToString());
+
+
+                    ViewData["Notification"] = new Notification
+                    {
+                        Message = "Ooops! Kažkas negerai!",
+                        Type = Enums.NotificationType.Error
+                    };
+
+
+                }
+
+                return Page();
             }
 
             return Page();
+
         }
 
         public async Task<IActionResult> OnPostDelete()

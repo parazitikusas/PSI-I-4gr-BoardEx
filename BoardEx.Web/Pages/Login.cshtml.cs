@@ -21,30 +21,38 @@ namespace BoardEx.Web.Pages
         {
         }
 
-        public async Task<IActionResult> OnPost(string ReturnUrl)
+        public async Task<IActionResult> OnPost(string? ReturnUrl)
         {
-            var signInResult = await signInManager.PasswordSignInAsync(
+            if (ModelState.IsValid)
+            {
+                var signInResult = await signInManager.PasswordSignInAsync(
                 LoginViewModel.Username, LoginViewModel.Password, false, false);
 
-            if (signInResult.Succeeded)
-            {
-                if (!string.IsNullOrEmpty(ReturnUrl))
+                if (signInResult.Succeeded)
                 {
-                    return RedirectToPage(ReturnUrl);
-                }
+                    if (!string.IsNullOrEmpty(ReturnUrl))
+                    {
+                        return RedirectToPage(ReturnUrl);
+                    }
 
-                return RedirectToPage("Index");
+                    return RedirectToPage("Index");
+                }
+                else
+                {
+                    ViewData["Notification"] = new Notification
+                    {
+                        Type = Enums.NotificationType.Error,
+                        Message = "Nepavyko prisijungti!"
+                    };
+
+                    return Page();
+                }
             }
             else
             {
-                ViewData["Notification"] = new Notification
-                {
-                    Type = Enums.NotificationType.Error,
-                    Message = "Nepavyko prisijungti!"
-                };
-
                 return Page();
             }
+            
         }
     }
 }

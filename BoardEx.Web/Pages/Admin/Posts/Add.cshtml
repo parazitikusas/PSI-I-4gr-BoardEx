@@ -9,98 +9,105 @@
 	</div>
 </div>
 
-	<partial name="_Notification">
+<partial name="_Notification">
 
-<div>
-	<div class="container">
-		<form method="post">
-			<div class="mb-3">
-				<label for="name" class="form-label">Pavadinimas</label>
-				<input type="text" class="form-control" id="name" asp-for="AddBoardAdRequest.Name">
-			</div>
+	<div>
+		<div class="container">
+			<form method="post">
+				<div class="mb-3">
+					<label for="name" class="form-label">Pavadinimas</label>
+					<input type="text" required class="form-control" id="name" asp-for="AddBoardAdRequest.Name">
+					<span class="text-danger" asp-validation-for="AddBoardAdRequest.Name"></span>
+				</div>
 
-			<div class="mb-3">
-				<label for="city" class="form-label">Miestas</label>
-				<input type="text" class="form-control" id="city" asp-for="AddBoardAdRequest.City">
-			</div>
+				<div class="mb-3">
+					<label for="city" class="form-label">Miestas</label>
+					<input type="text" required class="form-control" id="city" asp-for="AddBoardAdRequest.City">
+					<span class="text-danger" asp-validation-for="AddBoardAdRequest.City"></span>
+				</div>
 
-			<div class="mb-3">
-				<label for="content" class="form-label">Aprašymas</label>
-				<textarea class="form-control" id="content" asp-for="AddBoardAdRequest.Content"></textarea>
-			</div>
+				<div class="mb-3">
+					<label for="content" class="form-label">Aprašymas</label>
+					<textarea class="form-control" required id="content" asp-for="AddBoardAdRequest.Content"></textarea>
+					<span class="text-danger" asp-validation-for="AddBoardAdRequest.Content"></span>
+				</div>
 
 
-			<div class="mb-3">
-				<label for="price" class="form-label">Kaina</label>
-				<input type="number" class="form-control" id="price" asp-for="AddBoardAdRequest.Price">
-			</div>
+				<div class="mb-3">
+					<label for="price" class="form-label">Kaina</label>
+					<input type="number" required class="form-control" id="price" asp-for="AddBoardAdRequest.Price">
+					<span class="text-danger" asp-validation-for="AddBoardAdRequest.Price"></span>
+				</div>
 
-			<div class="mb-3">
-				<label for="featuredImageUpload" class="form-label">Įkelti nuotrauką </label>
-				<input type="file" id="featuredImageUpload" asp-for="FeaturedImage" />
-				<img src="" id="featuredImageDisplay" style="display:none; width:100px" />
-			</div>
+				<div class="mb-3">
+					<label for="featuredImageUpload" class="form-label">Įkelti nuotrauką </label>
+					<input type="file" id="featuredImageUpload" asp-for="FeaturedImage" />
+					<img src="" id="featuredImageDisplay" style="display:none; width:100px" />
+				</div>
 
-			<div class="mb-3">
-				<label for="featuredImageUrl" class="form-label">Nuotraukos nuoroda</label>
-				<input type="text" class="form-control" id="featuredImageUrl" asp-for="AddBoardAdRequest.FeaturedImageUrl" readonly>
-			</div>
+				<div class="mb-3">
+					<label for="featuredImageUrl" class="form-label">Nuotraukos nuoroda</label>
+					<input type="text" required class="form-control" id="featuredImageUrl" asp-for="AddBoardAdRequest.FeaturedImageUrl" readonly>
+					<span class="text-danger" asp-validation-for="AddBoardAdRequest.FeaturedImageUrl"></span>
+				</div>
 
-			<div class="mb-3">
-				<label for="author" class="form-label">Autorius</label>
-				<input type="text" class="form-control" id="author" asp-for="AddBoardAdRequest.Author">
-			</div>
+				<div class="mb-3">
+					<label for="author" class="form-label">Autorius</label>
+					<input type="text" required class="form-control" id="author" asp-for="AddBoardAdRequest.Author">
+					<span class="text-danger" asp-validation-for="AddBoardAdRequest.Author"></span>
+				</div>
 
-			<div class="mb-3">
-				<label for="" class="form-label">Kategorijos (atskirti kableliais)</label>
-				<input type="text" class="form-control" id="tags" asp-for="Tags"/>
-			</div>
+				<div class="mb-3">
+					<label for="" class="form-label">Kategorijos (atskirti kableliais)</label>
+					<input type="text" required class="form-control" id="tags" asp-for="Tags" />
+					<span class="text-danger" asp-validation-for="Tags"></span>
+				</div>
 
-			<div class="form-check mb-3">
-				<input class="form-check-input" type="checkbox" id="isSold" asp-for="AddBoardAdRequest.IsSold" />
-				<label for="isSold" class="form-check-label">
-					Parduota
-				</label>
-			</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" id="isSold" asp-for="AddBoardAdRequest.IsSold" />
+					<label for="isSold" class="form-check-label">
+						Parduota
+					</label>
+				</div>
 
-			<div class="mb-3">
-				<button class="button btn btn-primary" type="submit">Įkelti</button>
-			</div>
-		</form>
+				<div class="mb-3">
+					<button class="button btn btn-primary" type="submit">Įkelti</button>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
 
-@section Scripts {
-	<script>
-		var editor = new FroalaEditor('#content', {
-			imageUploadURL: '/api/images'
-		});
-
-		const featuredImageUploadElement = document.getElementById('featuredImageUpload');
-		const featuredImageUrl = document.getElementById('featuredImageUrl');
-		const featuredImageDisplay = document.getElementById('featuredImageDisplay');
-
-		async function uploadFeaturedImage(e) {
-
-			console.log(e.target.files[0]);
-
-			let data = new FormData();
-			data.append('file', e.target.files[0]);
-
-			await fetch('/api/images', {
-				method: 'POST',
-				headers: {
-					'Accept': '*/*',
-				},
-				body: data
-			}).then(response => response.json())
-			.then(result => {
-				featuredImageUrl.value = result.link;
-				featuredImageDisplay.style.display = 'block';
-				featuredImageDisplay.src = result.link;
+	@section Scripts {
+		<script>
+			var editor = new FroalaEditor('#content', {
+				imageUploadURL: '/api/images'
 			});
-		}
 
-		featuredImageUploadElement.addEventListener('change', uploadFeaturedImage);
-	</script>
-}
+			const featuredImageUploadElement = document.getElementById('featuredImageUpload');
+			const featuredImageUrl = document.getElementById('featuredImageUrl');
+			const featuredImageDisplay = document.getElementById('featuredImageDisplay');
+
+			async function uploadFeaturedImage(e) {
+
+				console.log(e.target.files[0]);
+
+				let data = new FormData();
+				data.append('file', e.target.files[0]);
+
+				await fetch('/api/images', {
+					method: 'POST',
+					headers: {
+						'Accept': '*/*',
+					},
+					body: data
+				}).then(response => response.json())
+					.then(result => {
+						featuredImageUrl.value = result.link;
+						featuredImageDisplay.style.display = 'block';
+						featuredImageDisplay.src = result.link;
+					});
+			}
+
+			featuredImageUploadElement.addEventListener('change', uploadFeaturedImage);
+		</script>
+	}
